@@ -8,49 +8,60 @@ class Signup extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      firstName: '',
+      lastName: '',
       email: '',
-      password1: '',
-      password2: '',
+      password: '',
       error: ''
     };
+    this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+    this.handleChangeLastName = this.handleChangeLastName.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangePassword1 = this.handleChangePassword1.bind(this);
-    this.handleChangePassword2 = this.handleChangePassword2.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChangeFirstName(value) {
+    this.setState({firstName: value});
+  }
+
+  handleChangeLastName(value) {
+    this.setState({lastName: value});
   }
 
   handleChangeEmail(value) {
     this.setState({email: value});
   }
 
-  handleChangePassword1(value) {
-    this.setState({password1: value});
-  }
-
-  handleChangePassword2(value) {
-    this.setState({password2: value});
+  handleChangePassword(value) {
+    this.setState({password: value});
   }
 
   handleSubmit() {
-    if (this.state.email && this.state.password1 && this.state.password1 === this.state.password2) {
+    if (this.state.firstName && this.state.lastName
+      && this.state.email && this.state.password) {
+      const firstName = this.state.firstName;
+      const lastName = this.state.lastName;
       const email = this.state.email;
-      const password = this.state.password1;
+      const password = this.state.password;
       this.props.signup({
+        firstName,
+        lastName,
         email,
         password
       }, this.props.navigation);
       // clear the state after signup for security
       this.setState({
+        firstName: '',
+        lastName: '',
         email: '',
-        password1: '',
-        password2: '',
+        password: '',
         error: ''
       });
     } else {
       this.setState({
-        password1: '',
-        password2: '',
-        error: 'Email and password cannot be empty.  Passwords must also match.'
+        password: '',
+        error: 'All fields are required'
       });
     }
   }
@@ -60,7 +71,25 @@ class Signup extends React.Component {
     <KeyboardAvoidingView behavior="position" style={styles.container}>
       <ScrollView>
         <Text style={styles.error}>{this.state.error}</Text>
-        <Text style={styles.textLabel}>Enter a Email</Text>
+        <Text style={styles.textLabel}>First Name</Text>
+        <TextInput
+          style={styles.textInput}
+          autoCapitalize="none"
+          autoCorrect={false}
+          maxLength={15}
+          value={this.state.firstName}
+          onChangeText={(firstName) => this.handleChangeFirstName(firstName)}
+        />
+        <Text style={styles.textLabel}>Last Name</Text>
+        <TextInput
+          style={styles.textInput}
+          autoCapitalize="none"
+          autoCorrect={false}
+          maxLength={15}
+          value={this.state.lastName}
+          onChangeText={(lastName) => this.handleChangeLastName(lastName)}
+        />
+        <Text style={styles.textLabel}>Email</Text>
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
@@ -69,25 +98,15 @@ class Signup extends React.Component {
           value={this.state.email}
           onChangeText={(email) => this.handleChangeEmail(email)}
         />
-        <Text style={styles.textLabel}>Enter a Password</Text>
+        <Text style={styles.textLabel}>Password</Text>
         <TextInput
           style={styles.textInput}
           secureTextEntry={true}
           autoCapitalize="none"
           autoCorrect={false}
           maxLength={15}
-          value={this.state.password1}
-          onChangeText={(password1) => this.handleChangePassword1(password1)}
-        />
-        <Text style={styles.textLabel}>Confirm Password</Text>
-        <TextInput
-          style={styles.textInput}
-          secureTextEntry={true}
-          autoCapitalize="none"
-          autoCorrect={false}
-          maxLength={15}
-          value={this.state.password2}
-          onChangeText={(password2) => this.handleChangePassword2(password2)}
+          value={this.state.password}
+          onChangeText={(password) => this.handleChangePassword(password)}
         />
         <Button
           buttonStyle={styles.button}
