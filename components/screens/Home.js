@@ -4,13 +4,24 @@ import { connect } from 'react-redux';
 
 import { logout } from '../redux/auth';
 
-class Main extends React.Component {
+class Home extends React.Component {
   render() {
+
     return (
       <View style={styles.container}>
-        <Text>Open up Main.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Text>My Lists</Text>
+        <Button
+          buttonStyle={styles.button}
+          onPress={() => navigation.navigate('Books', {user})} title="Books"/>
+        <Button
+          buttonStyle={styles.button}
+          onPress={() => navigation.navigate('Movies')} title="Movies"/>
+        <Button
+          buttonStyle={styles.button}
+          onPress={() => navigation.navigate('Podcasts')} title="Podcasts"/>
+        <Button
+          buttonStyle={styles.button}
+          onPress={() => navigation.navigate('TVShows')} title="TV Shows"/>
         <Button
           buttonStyle={styles.button}
           title="Logout"
@@ -25,7 +36,7 @@ const mapDispatchToProps = (dispatch) => ({
   logout: (navigation) => dispatch(logout(navigation))
 });
 
-export default connect(null, mapDispatchToProps)(Main);
+export default connect(null, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
   container: {
