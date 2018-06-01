@@ -37,7 +37,7 @@ export const SignedIn = TabNavigator(
       navigationOptions: {
         tabBarLabel: 'List',
         tabBarIcon: ({ tintColor }) =>
-          <FontAwesome name="home" size={30} color={tintColor} />
+          <FontAwesome name="list" size={30} color={tintColor} />
       }
     }
   },
