@@ -3,40 +3,57 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 import { logout } from '../redux/auth';
+import { fetchListByCategory } from '../redux/listByCategory'
 
 class Home extends React.Component {
   render() {
+
+    const userId = this.props.userId
+    const navigation = this.props.navigation
 
     return (
       <View style={styles.container}>
         <Text>My Lists</Text>
         <Button
           buttonStyle={styles.button}
-          onPress={() => navigation.navigate('Books', {user})} title="Books"/>
+          onPress={() => navigation.navigate('Books', {user})}
+          title="Books"
+        />
         <Button
           buttonStyle={styles.button}
-          onPress={() => navigation.navigate('Movies')} title="Movies"/>
+          onPress={() => this.props.fetchList('movies', userId, navigation)}
+          title="Movies"
+        />
         <Button
           buttonStyle={styles.button}
-          onPress={() => navigation.navigate('Podcasts')} title="Podcasts"/>
+          onPress={() => navigation.navigate('Podcasts')}
+          title="Podcasts"
+        />
         <Button
           buttonStyle={styles.button}
-          onPress={() => navigation.navigate('TVShows')} title="TV Shows"/>
+          onPress={() => navigation.navigate('TVShows')}
+          title="TV Shows"
+        />
         <Button
           buttonStyle={styles.button}
           title="Logout"
-          onPress={() => this.props.logout(this.props.navigation)}
+          onPress={() => this.props.logout(navigation)}
         />
       </View>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  logout: (navigation) => dispatch(logout(navigation))
+const mapStateToProps = state => ({
+  userId: state.currentUser.id
+})
+
+const mapDispatchToProps = dispatch => ({
+  logout: (navigation) => dispatch(logout(navigation)),
+  fetchList: (category, userId, navigation) => dispatch(fetchListByCategory(category, userId, navigation))
 });
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
   container: {

@@ -1,17 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { connect } from 'react-redux';
 
-class List extends React.Component {
+class ListByCategory extends React.Component {
   render() {
+    console.log('props', this.props.recs)
     return (
       <View style={styles.container}>
-        <Text>Books</Text>
+        <Text>!CATEGORY!</Text>
+
       </View>
     )
   }
 }
 
-export default List
+const mapStateToProps = state => {
+  return {
+    recs: state.listByCategory
+  }
+}
+
+export default connect(mapStateToProps, null)(ListByCategory)
 
 const styles = StyleSheet.create({
   container: {
