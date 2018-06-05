@@ -4,10 +4,19 @@ import { connect } from 'react-redux';
 
 class ListByCategory extends React.Component {
   render() {
-    console.log('props', this.props.recs)
+
+    const recs = this.props.recs
+
     return (
       <View style={styles.container}>
         <Text>!CATEGORY!</Text>
+        {
+          recs.map(rec => {
+            return (
+              <Text key={rec.id}>{rec.item.title}</Text>
+            )
+          })
+        }
 
       </View>
     )

@@ -10,30 +10,24 @@ class Home extends React.Component {
 
     const userId = this.props.userId
     const navigation = this.props.navigation
+    const categories = ['Books', 'Movies', 'Podcasts', 'TV Shows']
 
     return (
       <View style={styles.container}>
         <Text>My Lists</Text>
-        <Button
-          buttonStyle={styles.button}
-          onPress={() => navigation.navigate('Books', {user})}
-          title="Books"
-        />
-        <Button
-          buttonStyle={styles.button}
-          onPress={() => this.props.fetchList('movies', userId, navigation)}
-          title="Movies"
-        />
-        <Button
-          buttonStyle={styles.button}
-          onPress={() => navigation.navigate('Podcasts')}
-          title="Podcasts"
-        />
-        <Button
-          buttonStyle={styles.button}
-          onPress={() => navigation.navigate('TVShows')}
-          title="TV Shows"
-        />
+        {
+          categories.map((category, i) => {
+            const categoryForRoute = category.split(' ').join().toLowerCase()
+            return (
+              <Button
+                key={i}
+                buttonStyle={styles.button}
+                onPress={() => this.props.fetchList(categoryForRoute, userId, navigation)}
+                title={category}
+              />
+            )
+          })
+        }
         <Button
           buttonStyle={styles.button}
           title="Logout"
