@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { logout } from '../redux/auth';
 import { fetchListByCategory } from '../redux/listByCategory'
+import Profile from './Profile'
 
 class MyLists extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class MyLists extends React.Component {
 
     return (
       <View style={styles.container}>
+      <Profile />
         <Text>My Lists</Text>
         {
           categories.map((category, i) => {
