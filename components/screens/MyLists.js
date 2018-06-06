@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
 import { fetchListByCategory } from '../redux/listByCategory'
 
-class Home extends React.Component {
+class MyLists extends React.Component {
   render() {
 
     const userId = this.props.userId
@@ -47,7 +47,7 @@ const mapDispatchToProps = dispatch => ({
   fetchList: (category, userId, navigation) => dispatch(fetchListByCategory(category, userId, navigation))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(MyLists);
 
 const styles = StyleSheet.create({
   container: {

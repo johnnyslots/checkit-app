@@ -10,7 +10,8 @@ export const fetchListByCategory = (category, userId, navigation) => dispatch =>
   .then(res => res.data)
   .then(listByCategory => {
     dispatch(getListByCategory(listByCategory))
-    navigation.navigate('ListByCategory')
+    category = category.charAt(0).toUpperCase() + category.split(',').join(' ').slice(1)
+    navigation.navigate('ListByCategory', {category})
   })
   .catch(err => console.log(err))
 }

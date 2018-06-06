@@ -4,7 +4,7 @@ import { FontAwesome } from 'react-native-vector-icons';
 
 import Login from './screens/Login';
 import Signup from './screens/Signup';
-import Home from './screens/Home';
+import MyLists from './screens/MyLists';
 import ListByCategory from './screens/ListByCategory';
 
 export const SignedOut = StackNavigator({
@@ -22,20 +22,21 @@ export const SignedOut = StackNavigator({
   }
 });
 
+export const Lists = StackNavigator({
+  MyLists: {
+    screen: MyLists
+  },
+  ListByCategory: {
+    screen: ListByCategory
+  }
+})
+
 export const SignedIn = TabNavigator(
   {
-    Home: {
-      screen: Home,
+    MyLists: {
+      screen: Lists,
       navigationOptions: {
-        tabBarLabel: 'Home',
-        tabBarIcon: ({ tintColor }) =>
-          <FontAwesome name="home" size={30} color={tintColor} />
-      }
-    },
-    ListByCategory: {
-      screen: ListByCategory,
-      navigationOptions: {
-        tabBarLabel: 'List',
+        tabBarLabel: 'My Lists',
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="list" size={30} color={tintColor} />
       }

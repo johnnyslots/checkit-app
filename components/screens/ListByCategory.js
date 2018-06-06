@@ -1,23 +1,28 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 class ListByCategory extends React.Component {
   render() {
 
     const recs = this.props.recs
+    const category = this.props.navigation.state.params.category
 
     return (
       <View style={styles.container}>
-        <Text>!CATEGORY!</Text>
-        {
-          recs.map(rec => {
-            return (
-              <Text key={rec.id}>{rec.item.title}</Text>
-            )
-          })
-        }
-
+        <Text>{category}</Text>
+        <List>
+          {
+            recs.map(rec => {
+              return (
+                <View key={rec.id}>
+                  <ListItem title={rec.item.title} />
+                </View>
+              )
+            })
+          }
+        </List>
       </View>
     )
   }
@@ -33,9 +38,9 @@ export default connect(mapStateToProps, null)(ListByCategory)
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flex: 1,
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
