@@ -29,7 +29,8 @@ class AddOwnRec extends React.Component {
 
   handleSubmit() {
     const userId = this.props.userId;
-    const category = this.props.category.split(' ').join().toLowerCase();
+    const category = this.props.category.split(' ').join(' ').toLowerCase();
+
     axios.post(`${IP}/api/recommendations/ownRec`, {item: this.state, userId, category})
     .then(() => {
       this.props.fetchList(category, userId);
@@ -40,19 +41,21 @@ class AddOwnRec extends React.Component {
 
   render() {
 
+    const category = this.props.category;
+
     return(
       <View>
-        <FormLabel>Add book</FormLabel>
+        <FormLabel>Add {category}</FormLabel>
         <FormInput
           // inputStyle={booksStyles.addBookInput}
           onChangeText={this.handleTitleChange}
-          // value={this.state.title}
+          value={this.state.title}
           placeholder="Title"
         />
         <FormInput
           // inputStyle={booksStyles.addBookInput}
           onChangeText={this.handleNotesChange}
-          // value={this.state.notes}
+          value={this.state.notes}
           placeholder="Notes"
         />
         <Button
