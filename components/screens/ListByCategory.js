@@ -20,7 +20,9 @@ class ListByCategory extends React.Component {
             recs.map(rec => {
               return (
                 <View key={rec.id}>
-                  <ListItem title={rec.item.title} />
+                  <ListItem
+                    title={rec.item.title}
+                    onPress={() => this.props.navigation.navigate('RecDetails', {rec})} />
                 </View>
               )
             })

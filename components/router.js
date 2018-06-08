@@ -7,7 +7,8 @@ import Signup from './screens/Signup';
 import MyLists from './screens/MyLists';
 import ListByCategory from './screens/ListByCategory';
 import NewRec from './screens/NewRec';
-import FindFriends from './screens/FindFriends'
+import FindFriends from './screens/FindFriends';
+import RecDetails from './screens/RecDetails';
 
 export const SignedOut = StackNavigator({
   Login: {
@@ -36,6 +37,9 @@ export const Lists = StackNavigator({
     navigationOptions: ({navigation}) => ({
       title: `${navigation.state.params.category}`
     })
+  },
+  RecDetails: {
+    screen: RecDetails
   }
 })
 
