@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+import { StyleSheet, Text, View } from 'react-native';
+import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import IP from '../../secrets';
 import axios from 'axios';
@@ -59,6 +59,7 @@ class AddOwnRec extends React.Component {
           placeholder="Notes"
         />
         <Button
+          buttonStyle={styles.button}
           onPress={this.handleSubmit}
           title="Add to list"
         />
@@ -77,3 +78,14 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddOwnRec);
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#2C4E91',
+    // margin: '3%',
+    // justifyContent: 'center',
+    // borderRadius: 10,
+    // height: 20,
+    // paddingBottom: '10%'
+  }
+})
