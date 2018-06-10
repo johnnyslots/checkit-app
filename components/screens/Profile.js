@@ -1,9 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, ListItem, Button, Avatar } from 'react-native-elements';
+import { withNavigation } from 'react-navigation';
 
 export default class Profile extends React.Component {
+
   render() {
+
+    const { navigate } = this.props.navigation
+
     return (
       <View >
         <Card title='Cody Smith'>
@@ -18,7 +23,9 @@ export default class Profile extends React.Component {
           <Button
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='Pending Recommendations' />
+            title='Pending Recommendations'
+            onPress={() => navigate('PendingRecs')} />
+          />
         </Card>
       </View>
     )

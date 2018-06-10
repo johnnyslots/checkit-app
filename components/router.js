@@ -9,6 +9,7 @@ import ListByCategory from './screens/ListByCategory';
 import NewRec from './screens/NewRec';
 import FindFriends from './screens/FindFriends';
 import RecDetails from './screens/RecDetails';
+import PendingRecs from './screens/PendingRecs';
 
 export const SignedOut = StackNavigator({
   Login: {
@@ -30,6 +31,12 @@ export const Lists = StackNavigator({
     screen: MyLists,
     navigationOptions: {
       title: 'Home'
+    }
+  },
+  PendingRecs: {
+    screen: PendingRecs,
+    navigationOptions: {
+      title: 'Pending'
     }
   },
   ListByCategory: {

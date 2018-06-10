@@ -15,7 +15,7 @@ class MyLists extends React.Component {
 
     return (
       <View style={styles.container}>
-      <Profile />
+      <Profile navigation={navigation}/>
         <Text>My Lists</Text>
         {
           categories.map((category, i) => {
