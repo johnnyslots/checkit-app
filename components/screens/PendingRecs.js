@@ -1,20 +1,18 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { months } from '../utils';
+import { getRecommendedAtDate } from '../utils';
 
 class PendingRecs extends React.Component {
   render() {
 
     const { pendingRecs } = this.props;
 
-
     return (
       <View>
         {
           pendingRecs.map(rec => {
-            const dateSplit = rec.createdAt.slice(0, 10).split('-');
-            const recommendedAt = `${months[dateSplit[1]]} ${dateSplit[2]}, ${dateSplit[0]}`;
+            const recommendedAt = getRecommendedAtDate(rec.createdAt)
             return (
               <View key={rec.id}>
                 <Text>{rec.item.title}</Text>

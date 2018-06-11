@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, Text, Linking } from 'react-native';
-import { months } from '../utils';
+import { getRecommendedAtDate } from '../utils';
 
 export default class RecDetails extends React.Component {
   render() {
     const recDetails = this.props.navigation.state.params.rec;
     const recommender = recDetails.from ? recDetails.from.fullName : 'me';
     const url = recDetails.item.findOnGoogle
-    const dateSplit = recDetails.createdAt.slice(0, 10).split('-');
-    const recommendedAt = `${months[dateSplit[1]]} ${dateSplit[2]}, ${dateSplit[0]}`;
+    const recommendedAt = getRecommendedAtDate(recDetails.createdAt)
 
     return(
       <View>
