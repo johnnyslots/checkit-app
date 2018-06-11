@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, ListItem, Button, Avatar } from 'react-native-elements';
-import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
+import { fetchPendingRecs } from '../redux/pendingRecs'
 
-export default class Profile extends React.Component {
+
+class Profile extends React.Component {
 
   render() {
 
-    const { navigate } = this.props.navigation
+    const { fetchPending, userId, navigation } = this.props
 
     return (
       <View >
@@ -24,13 +26,21 @@ export default class Profile extends React.Component {
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='Pending Recommendations'
-            onPress={() => navigate('PendingRecs')} />
+            onPress={() => fetchPending(userId, navigation)} />
           />
         </Card>
       </View>
     )
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  fetchPending: (userId, navigation) => {
+    dispatch(fetchPendingRecs(userId, navigation))
+  }
+})
+
+export default connect(null, mapDispatchToProps)(Profile)
 
 const styles = StyleSheet.create({
   container: {

@@ -9,13 +9,13 @@ import Profile from './Profile'
 class MyLists extends React.Component {
   render() {
 
-    const userId = this.props.userId
-    const navigation = this.props.navigation
-    const categories = ['Books', 'Movies', 'Podcasts', 'TV Shows']
+    const userId = this.props.userId;
+    const navigation = this.props.navigation;
+    const categories = ['Books', 'Movies', 'Podcasts', 'TV Shows'];
 
     return (
       <View style={styles.container}>
-      <Profile navigation={navigation}/>
+      <Profile userId={userId} navigation={navigation}/>
         <Text>My Lists</Text>
         {
           categories.map((category, i) => {
