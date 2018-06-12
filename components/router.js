@@ -26,7 +26,7 @@ export const SignedOut = StackNavigator({
   }
 });
 
-export const Lists = StackNavigator({
+const Lists = StackNavigator({
   MyLists: {
     screen: MyLists,
     navigationOptions: {
@@ -50,6 +50,15 @@ export const Lists = StackNavigator({
   }
 })
 
+const NewRecStack = StackNavigator({
+  NewRec: {
+    screen: NewRec,
+    navigationOptions: {
+      title: 'Send or Request'
+    }
+  }
+})
+
 export const SignedIn = TabNavigator(
   {
     MyLists: {
@@ -60,10 +69,10 @@ export const SignedIn = TabNavigator(
       }
     },
     NewRec: {
-      screen: NewRec,
+      screen: NewRecStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) =>
-          <FontAwesome name="plus" size={30} color={tintColor} />
+          <FontAwesome name="plus" size={30} color={tintColor} />,
       }
     },
     FindFriends: {
