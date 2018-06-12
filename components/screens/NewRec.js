@@ -32,7 +32,7 @@ export default class NewRec extends React.Component {
           containerStyle={{backgroundColor: 'green'}}
         />
         {
-          selectedIndex ? <RequestRec /> : <SendRec />
+          selectedIndex ? <SendRec /> : <RequestRec />
         }
       </View>
     )
