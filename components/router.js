@@ -54,7 +54,7 @@ const NewRecStack = StackNavigator({
   NewRec: {
     screen: NewRec,
     navigationOptions: {
-      title: 'Send or Request'
+      title: 'New Recommendation'
     }
   }
 })
