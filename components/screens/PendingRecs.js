@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { getRecommendedAtDate } from '../utils';
-import { updatePendingRec } from '../redux/pendingRecs';
+import { updatePendingRec, deletePendingRec } from '../redux/pendingRecs';
 
 class PendingRecs extends React.Component {
   render() {
 
-    const { pendingRecs, acceptRec } = this.props;
+    const { pendingRecs, acceptRec, deleteRec } = this.props;
 
     return (
       <View>
@@ -26,7 +26,7 @@ class PendingRecs extends React.Component {
                   />
                   <Button
                     title="Dismiss this recommendation"
-                    onPress={() => console.log('DISMISS')}
+                    onPress={() => deleteRec(rec.id, pendingRecs)}
                   />
                 </View>
               )
@@ -48,7 +48,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  acceptRec: (recId, allPendingrecs) => dispatch(updatePendingRec(recId, allPendingrecs))
+  acceptRec: (recId, allPendingrecs) => dispatch(updatePendingRec(recId, allPendingrecs)),
+  deleteRec: (recId, allPendingrecs) => dispatch(deletePendingRec(recId, allPendingrecs))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PendingRecs)

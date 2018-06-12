@@ -3,10 +3,13 @@ import IP from '../../secrets';
 
 const GET_PENDING_RECS = 'GET_PENDING_RECS';
 const ACCEPT_PENDING_REC = 'ACCEPT_PENDING_REC';
+const DISMISS_PENDING_REC = 'DISMISS_PENDING_REC';
 
 export const getPendingRecs = pendingRecs => ({type: GET_PENDING_RECS, pendingRecs})
 
 export const acceptPendingRec = remainingRecs => ({type: ACCEPT_PENDING_REC, remainingRecs})
+
+export const dismissPendingRec = remainingRecs => ({type: DISMISS_PENDING_REC, remainingRecs})
 
 export const fetchPendingRecs = (userId, navigation) => dispatch => {
   axios.get(`${IP}/api/recommendations/pending/users/${userId}`)
@@ -30,6 +33,17 @@ export const updatePendingRec = (recId, allPendingRecs) => dispatch => {
   .catch(err => console.log(err))
 }
 
+export const deletePendingRec = (recId, allPendingRecs) => dispatch => {
+  axios.delete(`${IP}/api/recommendations/${recId}`)
+  .then(res => res.data)
+  .then(() => {
+    const recsAfterDismissal = allPendingRecs.filter(rec => {
+      return rec.id !== recId
+    })
+    dispatch(dismissPendingRec(recsAfterDismissal))
+  })
+}
+
 export default function reducer (pendingRecs = {}, action) {
   switch (action.type) {
 
@@ -37,6 +51,9 @@ export default function reducer (pendingRecs = {}, action) {
       return action.pendingRecs
 
     case ACCEPT_PENDING_REC:
+      return action.remainingRecs
+
+    case DISMISS_PENDING_REC:
       return action.remainingRecs
 
     default:
