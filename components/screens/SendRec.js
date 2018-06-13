@@ -6,6 +6,7 @@ import { TextField } from 'react-native-material-textfield';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import IP from '../../secrets';
+import socket from '../socket';
 
 class SendRec extends React.Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class SendRec extends React.Component {
       }
     })
     .then(() => {
-      // socket.emit('newRec', this.state);
+      socket.emit('newRec', this.state);
       this.setState({
         email: '',
         title: '',

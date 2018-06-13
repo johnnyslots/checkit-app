@@ -5,8 +5,15 @@ import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
 import { fetchListByCategory } from '../redux/listByCategory'
 import Profile from './Profile'
+import registerForPushNotificationsAsync from '../notification'
 
 class MyLists extends React.Component {
+
+  componentDidMount() {
+    // registerForPushNotificationsAsync()
+    // .then(data => console.log('data!!!!', data))
+  }
+
   render() {
 
     const userId = this.props.userId;
