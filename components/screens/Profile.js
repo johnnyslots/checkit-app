@@ -9,11 +9,11 @@ class Profile extends React.Component {
 
   render() {
 
-    const { fetchPending, userId, navigation } = this.props
+    const { fetchPending, user, navigation } = this.props
 
     return (
       <View >
-        <Card title='Cody Smith'>
+        <Card title={user.fullName}>
           <Avatar
             medium
             rounded
@@ -26,7 +26,7 @@ class Profile extends React.Component {
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='Pending Recommendations'
-            onPress={() => fetchPending(userId, navigation)} />
+            onPress={() => fetchPending(user.id, navigation)} />
           />
         </Card>
       </View>
@@ -34,13 +34,17 @@ class Profile extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.currentUser
+})
+
 const mapDispatchToProps = dispatch => ({
   fetchPending: (userId, navigation) => {
     dispatch(fetchPendingRecs(userId, navigation))
   }
 })
 
-export default connect(null, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
 
 const styles = StyleSheet.create({
   container: {

@@ -3,7 +3,7 @@ import axios from 'axios';
 import IP from '../secrets';
 
 
-const PUSH_ENDPOINT = `${IP}/users/push-token`;
+const PUSH_ENDPOINT = `${IP}/api/users/push-token`;
 
 async function registerForPushNotificationsAsync() {
   const { status: existingStatus } = await Permissions.getAsync(
@@ -41,7 +41,7 @@ async function registerForPushNotificationsAsync() {
       email: 'mike@email.com'
     }
   }
-  return axios.post(PUSH_ENDPOINT, data, headers);
+  return axios.put(PUSH_ENDPOINT, data, headers);
   // return fetch(PUSH_ENDPOINT, {
   //   method: 'POST',
   //   headers: {

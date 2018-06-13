@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView, Button }
 import { connect } from 'react-redux';
 
 import { login } from '../redux/auth';
+import PushNotification from '../pushNotification'
 
 class Login extends React.Component {
   constructor(props){
@@ -86,6 +87,7 @@ class Login extends React.Component {
           }}
         />
       </ScrollView>
+      <PushNotification />
     </KeyboardAvoidingView>
   );
  }
