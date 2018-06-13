@@ -43,6 +43,8 @@ class NewRecAlert extends React.Component {
 
   render() {
     const { displayAlert } = this.state;
+    const fullName = this.props.user.fullName;
+    const newRecAlert = `You received a new recommendation from ${fullName}!`;
 
     return(
       <View style={styles.container}>
@@ -51,7 +53,7 @@ class NewRecAlert extends React.Component {
             <AwesomeAlert
               show={displayAlert}
               showProgress={false}
-              title="{newRecAlert}"
+              title={newRecAlert}
               message="Do you want to see more details?"
               closeOnTouchOutside={true}
               closeOnHardwareBackPress={false}

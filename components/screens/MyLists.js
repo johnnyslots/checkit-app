@@ -7,7 +7,6 @@ import { fetchListByCategory } from '../redux/listByCategory';
 import Profile from './Profile';
 import NewRecAlert from './NewRecAlert';
 
-
 class MyLists extends React.Component {
   render() {
 
