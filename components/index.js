@@ -4,6 +4,7 @@ import { createRootNavigator } from './router';
 import { isSignedIn } from './auth';
 import store from './store';
 
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
 import { fetchListByCategory } from '../redux/listByCategory';
 import Profile from './Profile';
+import NewRecAlert from './NewRecAlert';
+
 
 class MyLists extends React.Component {
   render() {
@@ -15,26 +17,27 @@ class MyLists extends React.Component {
 
     return (
       <View style={styles.container}>
-      <Profile navigation={navigation}/>
-        <Text>My Lists</Text>
-        {
-          categories.map((category, i) => {
-            const categoryForRoute = category.split(' ').join().toLowerCase()
-            return (
-              <Button
-                key={i}
-                buttonStyle={styles.button}
-                onPress={() => this.props.fetchList(categoryForRoute, userId, navigation)}
-                title={category}
-              />
-            )
-          })
-        }
-        <Button
-          buttonStyle={styles.button}
-          title="Logout"
-          onPress={() => this.props.logout(navigation)}
-        />
+        <Profile navigation={navigation}/>
+          <Text>My Lists</Text>
+          {
+            categories.map((category, i) => {
+              const categoryForRoute = category.split(' ').join().toLowerCase()
+              return (
+                <Button
+                  key={i}
+                  buttonStyle={styles.button}
+                  onPress={() => this.props.fetchList(categoryForRoute, userId, navigation)}
+                  title={category}
+                />
+              )
+            })
+          }
+          <Button
+            buttonStyle={styles.button}
+            title="Logout"
+            onPress={() => this.props.logout(navigation)}
+          />
+          <NewRecAlert navigation={navigation}/>
       </View>
     );
   }

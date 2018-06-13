@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Card, ListItem, Button, Avatar } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { fetchPendingRecs } from '../redux/pendingRecs'
+import { fetchPendingRecs } from '../redux/pendingRecs';
 
 
 class Profile extends React.Component {
