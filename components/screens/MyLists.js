@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 import { logout } from '../redux/auth';
-import { fetchListByCategory } from '../redux/listByCategory'
-import Profile from './Profile'
+import { fetchListByCategory } from '../redux/listByCategory';
+import Profile from './Profile';
 
 class MyLists extends React.Component {
   render() {
