@@ -23,6 +23,7 @@ class NewRecAlert extends React.Component {
 
   handleSocket() {
     socket.on('newRec', (socketData) => {
+        console.log('SOCKET DATA', socketData)
       if(socketData.email.toLowerCase() === this.props.user.email) {
         this.setState({socketData, displayAlert: true})
       }
@@ -36,44 +37,46 @@ class NewRecAlert extends React.Component {
   };
 
   handleIncomingRecConfirmation() {
-    const { fetchPending, user, navigation } = this.props
-    fetchPending(user.id, navigation)
+    const { fetchPending, user, nav } = this.props
+    fetchPending(user.id)
+    nav()
     this.hideAlert();
   }
 
   render() {
     const { displayAlert } = this.state;
-    const fullName = this.props.user.fullName;
+    console.log('STATE', this.state)
+    const fullName = this.state.socketData ? this.state.socketData.fullName : null;
     const newRecAlert = `You received a new recommendation from ${fullName}!`;
 
-    return(
-      <View style={styles.container}>
-        {
-          displayAlert ?
-            <AwesomeAlert
-              show={displayAlert}
-              showProgress={false}
-              title={newRecAlert}
-              message="Do you want to see more details?"
-              closeOnTouchOutside={true}
-              closeOnHardwareBackPress={false}
-              showCancelButton={true}
-              showConfirmButton={true}
-              cancelText="Not now"
-              confirmText="More details"
-              confirmButtonColor="#aaa"
-              cancelButtonColor='#aaa'
-              onCancelPressed={() => {
-                this.hideAlert();
-              }}
-              onConfirmPressed={() => {
-                this.handleIncomingRecConfirmation();
-              }}
-            />
-          : null
-        }
-      </View>
-    )
+    if(displayAlert) {
+      return (
+        <View style={styles.container}>
+          <AwesomeAlert
+            show={displayAlert}
+            showProgress={false}
+            title={newRecAlert}
+            message="Do you want to see more details?"
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showCancelButton={true}
+            showConfirmButton={true}
+            cancelText="Not now"
+            confirmText="More details"
+            confirmButtonColor="#aaa"
+            cancelButtonColor='#aaa'
+            onCancelPressed={() => {
+              this.hideAlert();
+            }}
+            onConfirmPressed={() => {
+              this.handleIncomingRecConfirmation();
+            }}
+          />
+        </View>
+      )
+    }
+
+    else return null
   }
 }
 
