@@ -1,11 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
-
 import { logout } from '../redux/auth';
 import { fetchListByCategory } from '../redux/listByCategory';
 import Profile from './Profile';
-// import NewRecAlert from './NewRecAlert';
 
 class MyLists extends React.Component {
   render() {
@@ -36,7 +34,6 @@ class MyLists extends React.Component {
             title="Logout"
             onPress={() => this.props.logout(navigation)}
           />
-
       </View>
     );
   }

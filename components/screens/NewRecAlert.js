@@ -23,7 +23,6 @@ class NewRecAlert extends React.Component {
 
   handleSocket() {
     socket.on('newRec', (socketData) => {
-        console.log('SOCKET DATA', socketData)
       if(socketData.email.toLowerCase() === this.props.user.email) {
         this.setState({socketData, displayAlert: true})
       }
@@ -45,8 +44,7 @@ class NewRecAlert extends React.Component {
 
   render() {
     const { displayAlert } = this.state;
-    console.log('STATE', this.state)
-    const fullName = this.state.socketData ? this.state.socketData.fullName : null;
+    const fullName = this.state.socketData.sender ? this.state.socketData.sender.fullName : null;
     const newRecAlert = `You received a new recommendation from ${fullName}!`;
 
     if(displayAlert) {

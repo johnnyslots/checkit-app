@@ -25,7 +25,6 @@ export default class App extends React.Component {
   }
 
   nav() {
-    // call navigate for AppNavigator here:
     this.navigator && this.navigator.dispatch(
       NavigationActions.navigate({ routeName: 'PendingRecs' })
     );

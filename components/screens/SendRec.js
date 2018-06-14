@@ -17,7 +17,7 @@ class SendRec extends React.Component {
       notes: '',
       email: '',
       incorrectEmail: false,
-      senderId: null,
+      sender: {},
       recSent: false
     }
 
@@ -29,7 +29,7 @@ class SendRec extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({senderId: this.props.senderId})
+    this.setState({sender: this.props.sender})
   }
 
   handleCategoryChange(category) {
@@ -130,7 +130,7 @@ class SendRec extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  senderId: state.currentUser.id
+  sender: state.currentUser
 })
 
 export default connect(mapStateToProps, null)(SendRec)
