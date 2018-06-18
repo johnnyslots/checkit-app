@@ -20,7 +20,12 @@ class PendingRecs extends React.Component {
                 <View key={rec.id}>
                   <Text>{rec.item.title}</Text>
                   <Text>Recommended by {rec.from.fullName} on {recommendedAt}</Text>
-                  <Text>Notes: {rec.notes}</Text>
+                  {
+                    rec.notes
+                    ? <Text>Notes: {rec.notes}</Text>
+                    : null
+                  }
+
                   <Button
                     title={`Add to ${rec.item.category} list`}
                     onPress={() => acceptRec(rec.id, pendingRecs)}
