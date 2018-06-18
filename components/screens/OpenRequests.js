@@ -8,7 +8,6 @@ class OpenRequests extends React.Component {
   render() {
 
     const { openRequests, navigation } = this.props
-    console.log('navigation???', navigation)
 
     return (
       <ScrollView>
@@ -25,7 +24,7 @@ class OpenRequests extends React.Component {
                 title='Send Recommendation'
                 backgroundColor='#03A9D1'
                 buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                onPress={() => navigation.navigate('NewRec')}
+                onPress={() => navigation.navigate('FulfillRequest', {request})}
                 />
               </View>
             )

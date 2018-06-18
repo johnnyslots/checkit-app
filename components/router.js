@@ -10,7 +10,8 @@ import NewRec from './screens/NewRec';
 import FindFriends from './screens/FindFriends';
 import RecDetails from './screens/RecDetails';
 import PendingRecs from './screens/PendingRecs';
-import OpenRequests from './screens/OpenRequests'
+import OpenRequests from './screens/OpenRequests';
+import FulfillRequest from './screens/FulfillRequest';
 
 export const SignedOut = StackNavigator({
   Login: {
@@ -44,6 +45,12 @@ const Lists = StackNavigator({
     screen: OpenRequests,
     navigationOptions: {
       title: 'Open Requests'
+    }
+  },
+  FulfillRequest: {
+    screen: FulfillRequest,
+    navigationOptions: {
+      title: 'Send Recommendation'
     }
   },
   ListByCategory: {

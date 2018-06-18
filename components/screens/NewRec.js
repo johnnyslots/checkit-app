@@ -23,6 +23,7 @@ export default class NewRec extends React.Component {
     const buttons = ['Send', 'Request']
     const { selectedIndex } = this.state
 
+
     return (
       <View style={styles.container}>
         <ButtonGroup
