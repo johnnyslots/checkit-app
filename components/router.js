@@ -12,6 +12,7 @@ import RecDetails from './screens/RecDetails';
 import PendingRecs from './screens/PendingRecs';
 import OpenRequests from './screens/OpenRequests';
 import FulfillRequest from './screens/FulfillRequest';
+import PendingFriends from './screens/PendingFriends';
 
 export const SignedOut = StackNavigator({
   Login: {
@@ -73,6 +74,21 @@ const NewRecStack = StackNavigator({
   }
 })
 
+const FindFriendsStack = StackNavigator({
+  FindFriends: {
+    screen: FindFriends,
+    navigationOptions: {
+      title: 'Find Friends'
+    }
+  },
+  PendingFriends: {
+    screen: PendingFriends,
+    navigationOptions: {
+      title: 'Pending Friend Requests'
+    }
+  }
+})
+
 export const SignedIn = TabNavigator(
   {
     MyLists: {
@@ -90,7 +106,7 @@ export const SignedIn = TabNavigator(
       }
     },
     FindFriends: {
-      screen: FindFriends,
+      screen: FindFriendsStack,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) =>
           <FontAwesome name="search" size={30} color={tintColor} />

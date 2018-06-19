@@ -1,15 +1,43 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import SearchUsers from './SearchUsers';
+import { fetchPendingFriends } from '../redux/pendingFriends';
 
-export default class FindFriends extends React.Component {
+class FindFriends extends React.Component {
   render() {
+
+    console.log('PROPS HERE!!!', this.props)
+
+    const { userId, fetchPendingFriends, navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Text>Find Friends</Text>
+        <Button
+          backgroundColor='#03A9F4'
+          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1}}
+          title='Pending Friend Requests'
+          onPress={() => fetchPendingFriends(userId, navigation)} />
+        />
+        <SearchUsers />
       </View>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  userId: state.currentUser.id
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchPendingFriends: (userId, navigation) => {
+    dispatch(fetchPendingFriends(userId, navigation))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FindFriends)
 
 const styles = StyleSheet.create({
   container: {
