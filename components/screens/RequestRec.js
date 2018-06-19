@@ -16,8 +16,8 @@ class RequestRec extends React.Component {
       message: '',
       email: '',
       incorrectEmail: false,
-      sender: {}
-      // recSent: false
+      sender: {},
+      // requestSent: false
     }
 
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -55,7 +55,7 @@ class RequestRec extends React.Component {
       }
     })
     .then(() => {
-      // socket.emit('newRec', this.state);
+      socket.emit('newRecRequest', (this.state));
       this.setState({
         email: '',
         message: '',

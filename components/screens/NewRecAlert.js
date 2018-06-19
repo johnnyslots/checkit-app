@@ -10,7 +10,8 @@ class NewRecAlert extends React.Component {
     super(props);
     this.state = {
       displayAlert: false,
-      socketData: {}
+      socketData: {},
+      type: ''
     }
     this.handleSocket = this.handleSocket.bind(this);
     this.hideAlert = this.hideAlert.bind(this);
@@ -22,6 +23,11 @@ class NewRecAlert extends React.Component {
   }
 
   handleSocket() {
+    socket.on('newRecRequest', (socketData) => {
+      if(socketData.email.toLowerCase() === this.props.user.email) {
+        this.setState({socketData, displayAlert: true, type: 'request' })
+      }
+    })
     socket.on('newRec', (socketData) => {
       if(socketData.email.toLowerCase() === this.props.user.email) {
         this.setState({socketData, displayAlert: true})
@@ -31,7 +37,8 @@ class NewRecAlert extends React.Component {
 
   hideAlert = () => {
     this.setState({
-      displayAlert: false
+      displayAlert: false,
+      type: ''
     });
   };
 
@@ -43,9 +50,11 @@ class NewRecAlert extends React.Component {
   }
 
   render() {
-    const { displayAlert } = this.state;
+    const { displayAlert, type } = this.state;
     const fullName = this.state.socketData.sender ? this.state.socketData.sender.fullName : null;
-    const newRecAlert = `You received a new recommendation from ${fullName}!`;
+    const alert = type === 'request' ?
+    `You received a new request from ${fullName}!`
+    : `You received a new recommendation from ${fullName}!`;
 
     if(displayAlert) {
       return (
@@ -53,7 +62,7 @@ class NewRecAlert extends React.Component {
           <AwesomeAlert
             show={displayAlert}
             showProgress={false}
-            title={newRecAlert}
+            title={alert}
             message="Do you want to see more details?"
             closeOnTouchOutside={true}
             closeOnHardwareBackPress={false}
