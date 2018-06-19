@@ -54,16 +54,15 @@ class RequestRec extends React.Component {
         .catch(err => console.log(err))
       }
     })
-    // .then(() => {
-    //   socket.emit('newRec', this.state);
-    //   this.setState({
-    //     email: '',
-    //     title: '',
-    //     notes: '',
-    //     incorrectEmail: false,
-    //     recSent: true
-    //   })
-    // })
+    .then(() => {
+      // socket.emit('newRec', this.state);
+      this.setState({
+        email: '',
+        message: '',
+        incorrectEmail: false
+        // recSent: true
+      })
+    })
     .catch(err => {
       this.setState({incorrectEmail: true})
       console.log(err)
