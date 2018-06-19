@@ -1,15 +1,18 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { Button } from 'react-native-elements';
 import { TextField } from 'react-native-material-textfield';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import IP from '../../secrets';
+import socket from '../socket';
 
 class FulfillRequest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      requestId: null,
       category: '',
       title: '',
       notes: '',
@@ -20,11 +23,13 @@ class FulfillRequest extends React.Component {
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleNotesChange = this.handleNotesChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetNavigation = this.resetNavigation.bind(this);
   }
 
   componentDidMount() {
     const { request } = this.props.navigation.state.params
     this.setState({
+      requestId: request.id,
       category: request.category,
       email: request.from.email,
       toId: request.from.id,
@@ -40,12 +45,23 @@ class FulfillRequest extends React.Component {
     this.setState({notes});
   }
 
+  resetNavigation(targetRoute) {
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: targetRoute }),
+      ],
+    });
+    this.props.navigation.dispatch(resetAction);
+  }
+
   handleSubmit() {
-    // const userEmail = this.state.email.toLowerCase();
     const recInfo = this.state
-    axios.post(`${IP}/api/recommendations`, {recInfo, fulfillingRequest: true})
+    axios.post(`${IP}/api/recommendations`, {recInfo})
     .then(() => {
+      socket.emit('newRec', this.state);
       this.setState({
+        requestId: null,
         category: '',
         title: '',
         notes: '',
@@ -53,6 +69,7 @@ class FulfillRequest extends React.Component {
         toId: null,
         sender: {}
       })
+      this.resetNavigation('MyLists')
     })
     .catch(err => console.log(err))
   }

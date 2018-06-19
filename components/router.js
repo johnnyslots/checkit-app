@@ -33,6 +33,7 @@ const Lists = StackNavigator({
     screen: MyLists,
     navigationOptions: {
       title: 'Home'
+      // headerLeft: null
     }
   },
   PendingRecs: {
