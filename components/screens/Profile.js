@@ -30,7 +30,7 @@ class Profile extends React.Component {
             onPress={() => fetchPending(user.id, navigation)} />
           />
           <Button
-            backgroundColor='#03A9D1'
+            backgroundColor='red'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='Open Requests'
             onPress={() => fetchRequests(user.id, navigation)} />

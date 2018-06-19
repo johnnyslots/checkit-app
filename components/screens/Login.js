@@ -50,7 +50,7 @@ class Login extends React.Component {
           style={styles.textInput}
           autoCapitalize="none"
           autoCorrect={false}
-          maxLength={15}
+          maxLength={30}
           placeholder="EMAIL"
           placeholderTextColor="tomato"
           value={this.state.email}
