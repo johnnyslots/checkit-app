@@ -13,6 +13,7 @@ class OpenRequests extends React.Component {
       <ScrollView>
         <Text>OPEN REQUESTS</Text>
         {
+          openRequests.length ?
           openRequests.map(request => {
             return (
               <View key={request.id}>
@@ -29,6 +30,10 @@ class OpenRequests extends React.Component {
               </View>
             )
           })
+          :
+          <View>
+            <Text>You have no open requests!</Text>
+          </View>
         }
       </ScrollView>
     )

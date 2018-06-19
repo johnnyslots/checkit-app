@@ -15,7 +15,7 @@ export default class App extends React.Component {
       signedIn: false,
       checkedSignIn: false
     };
-    this.nav = this.nav.bind(this)
+    this.nav = this.nav.bind(this);
   }
 
   componentWillMount() {
@@ -24,10 +24,17 @@ export default class App extends React.Component {
       .catch(error => console.error(error));
   }
 
-  nav() {
-    this.navigator && this.navigator.dispatch(
-      NavigationActions.navigate({ routeName: 'PendingRecs' })
-    );
+  nav(type) {
+    if(type === 'request') {
+      this.navigator && this.navigator.dispatch(
+        NavigationActions.navigate({ routeName: 'OpenRequests' })
+      );
+    }
+    else {
+      this.navigator && this.navigator.dispatch(
+        NavigationActions.navigate({ routeName: 'PendingRecs' })
+      );
+    }
   }
 
   render() {

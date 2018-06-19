@@ -4,6 +4,7 @@ import socket from '../socket';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux';
 import { fetchPendingRecs } from '../redux/pendingRecs';
+import { fetchOpenRequests } from '../redux/openRequests';
 
 class NewRecAlert extends React.Component {
   constructor(props) {
@@ -43,9 +44,17 @@ class NewRecAlert extends React.Component {
   };
 
   handleIncomingRecConfirmation() {
-    const { fetchPending, user, nav } = this.props
-    fetchPending(user.id)
-    nav()
+    const { fetchPending, fetchRequests, user, nav } = this.props
+    const requestType = this.state.type ? 'request' : null
+    if(requestType) {
+      fetchRequests(user.id)
+      // nav('request')
+    }
+    else {
+      fetchPending(user.id)
+      // nav()
+    }
+    nav(requestType);
     this.hideAlert();
   }
 
@@ -94,6 +103,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchPending: (userId, navigation) => {
     dispatch(fetchPendingRecs(userId, navigation))
+  },
+  fetchRequests: (userId, navigation) => {
+    dispatch(fetchOpenRequests(userId, navigation))
   }
 })
 
