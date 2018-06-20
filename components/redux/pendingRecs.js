@@ -42,6 +42,7 @@ export const deletePendingRec = (recId, allPendingRecs) => dispatch => {
     })
     dispatch(dismissPendingRec(recsAfterDismissal))
   })
+  .catch(err => console.log(err))
 }
 
 export default function reducer (pendingRecs = {}, action) {

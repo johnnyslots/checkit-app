@@ -2,17 +2,17 @@ import React from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-native-timeago';
-import { updateFriendRequest } from '../redux/pendingFriends';
+import { updateFriendRequest, dismissRequest } from '../redux/pendingFriends';
 
 class PendingFriends extends React.Component {
   render() {
 
-    const { pendingFriends, updateFriendRequest } = this.props;
+    const { pendingFriends, updateFriendRequest, dismissRequest } = this.props;
 
     return (
       <ScrollView>
-        <Text>PENDING FRIENDS</Text>
         {
+          pendingFriends.length ?
           pendingFriends.map(pending => {
             return (
               <View key={pending.id}>
@@ -24,11 +24,15 @@ class PendingFriends extends React.Component {
                   />
                   <Button
                     title='Ignore'
-                    onPress={() => null}
+                    onPress={() => dismissRequest(pending.id, pendingFriends)}
                   />
               </View>
             )
           })
+          :
+          <View>
+            <Text>You have no pending friend requests</Text>
+          </View>
         }
       </ScrollView>
     )
@@ -40,7 +44,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateFriendRequest: (requestId, allPendingRequests) => dispatch(updateFriendRequest(requestId, allPendingRequests))
+  updateFriendRequest: (requestId, allPendingRequests) => dispatch(updateFriendRequest(requestId, allPendingRequests)),
+  dismissRequest: (requestId, allPendingRequests) => dispatch(dismissRequest(requestId, allPendingRequests))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PendingFriends)
