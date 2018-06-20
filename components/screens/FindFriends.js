@@ -8,8 +8,6 @@ import { fetchPendingFriends } from '../redux/pendingFriends';
 class FindFriends extends React.Component {
   render() {
 
-    console.log('PROPS HERE!!!', this.props)
-
     const { userId, fetchPendingFriends, navigation } = this.props;
 
     return (

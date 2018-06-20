@@ -84,7 +84,7 @@ const FindFriendsStack = StackNavigator({
   PendingFriends: {
     screen: PendingFriends,
     navigationOptions: {
-      title: 'Pending Friend Requests'
+      title: 'Friend Requests'
     }
   }
 })

@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import TimeAgo from 'react-native-timeago';
+import { updateFriendRequest } from '../redux/pendingFriends';
 
 class PendingFriends extends React.Component {
   render() {
 
-    const { pendingFriends } = this.props;
+    const { pendingFriends, updateFriendRequest } = this.props;
 
     return (
       <ScrollView>
@@ -14,8 +16,16 @@ class PendingFriends extends React.Component {
           pendingFriends.map(pending => {
             return (
               <View key={pending.id}>
+                <TimeAgo time={pending.createdAt} />
                 <Text>{pending.friend.fullName}</Text>
-                <Text>{pending.friend.email}</Text>
+                  <Button
+                    title='Accept'
+                    onPress={() => updateFriendRequest(pending.id, pendingFriends)}
+                  />
+                  <Button
+                    title='Ignore'
+                    onPress={() => null}
+                  />
               </View>
             )
           })
@@ -29,4 +39,8 @@ const mapStateToProps = state => ({
   pendingFriends: state.pendingFriends
 })
 
-export default connect(mapStateToProps)(PendingFriends)
+const mapDispatchToProps = dispatch => ({
+  updateFriendRequest: (requestId, allPendingRequests) => dispatch(updateFriendRequest(requestId, allPendingRequests))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PendingFriends)
