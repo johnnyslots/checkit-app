@@ -1,22 +1,45 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { SearchBar, List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../redux/searchUsers';
 
 class SearchUsers extends React.Component {
   render() {
-    const { fetchUsers } = this.props
+    const { fetchUsers, users } = this.props
 
     return (
       <View>
-        <Text>SEARCH</Text>
         <SearchBar
           onChangeText={(input) => fetchUsers(input)}
           // onClearText={someMethod}
           icon={{ type: 'font-awesome', name: 'search' }}
           placeholder='Search for friends by email...'
         />
+        {
+          users.length ?
+          <List>
+            {
+              users.map(user => {
+                return (
+                  <View key={user.id}>
+                    <ListItem
+                      title={user.fullName}
+                      rightIcon={
+                        <Icon
+                          name={'add'}
+                          size={20}
+                          onPress={() => console.log('Pressed !')}
+                        />
+                      }
+                    />
+                  </View>
+                )
+              })
+            }
+          </List>
+          : null
+        }
       </View>
     )
   }

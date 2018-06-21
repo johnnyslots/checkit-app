@@ -12,13 +12,13 @@ class FindFriends extends React.Component {
 
     return (
       <View style={styles.container}>
-        <SearchUsers />
         <Button
           backgroundColor='#03A9F4'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1, marginTop: 1}}
           title='Pending Friend Requests'
           onPress={() => fetchPendingFriends(userId, navigation)} />
         />
+        <SearchUsers />
       </View>
     )
   }

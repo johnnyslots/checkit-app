@@ -9,7 +9,13 @@ export const fetchUsers = (input) => dispatch => {
   axios.get(`${IP}/api/users/search/${input}`)
   .then(res => res.data)
   .then(users => {
-    dispatch(getUsers(users))
+    if(users) {
+      dispatch(getUsers(users))
+    }
+    else {
+      let noUsers = []
+      dispatch(getUsers(noUsers))
+    }
   })
   .catch(err => console.log(err))
 }
