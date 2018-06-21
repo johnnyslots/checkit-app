@@ -48,11 +48,9 @@ class NewRecAlert extends React.Component {
     const requestType = this.state.type ? 'request' : null
     if(requestType) {
       fetchRequests(user.id)
-      // nav('request')
     }
     else {
       fetchPending(user.id)
-      // nav()
     }
     nav(requestType);
     this.hideAlert();

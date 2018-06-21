@@ -12,14 +12,13 @@ class FindFriends extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>Find Friends</Text>
+        <SearchUsers />
         <Button
           backgroundColor='#03A9F4'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1}}
+          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1, marginTop: 1}}
           title='Pending Friend Requests'
           onPress={() => fetchPendingFriends(userId, navigation)} />
         />
-        <SearchUsers />
       </View>
     )
   }
@@ -39,9 +38,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(FindFriends)
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flex: 1,
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
