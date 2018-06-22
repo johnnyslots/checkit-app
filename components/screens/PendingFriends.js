@@ -17,7 +17,7 @@ class PendingFriends extends React.Component {
             return (
               <View key={pending.id}>
                 <TimeAgo time={pending.createdAt} />
-                <Text>{pending.friend.fullName}</Text>
+                <Text>{pending.user.fullName}</Text>
                   <Button
                     title='Accept'
                     onPress={() => updateFriendRequest(pending.id, pendingFriends)}
