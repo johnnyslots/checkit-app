@@ -20,6 +20,10 @@ export const fetchUsers = (input, currentUserId) => dispatch => {
     })
     .catch(err => console.log(err))
   }
+  else {
+    let noUsers = []
+    dispatch(getUsers(noUsers))
+  }
 }
 
 export default function reducer(users = [], action) {

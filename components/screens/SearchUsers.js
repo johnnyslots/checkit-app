@@ -11,10 +11,23 @@ class SearchUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      searchValue: '',
       pendingOrRejected: [],
       accepted: []
     }
+    this.setSearchValue = this.setSearchValue.bind(this);
+    this.clearSearchValue = this.clearSearchValue.bind(this);
     this.addUser = this.addUser.bind(this);
+  }
+
+  setSearchValue(input) {
+    const { fetchUsers, currentUser } = this.props
+    this.setState({searchValue: input})
+    fetchUsers(input, currentUser.id)
+  }
+
+  clearSearchValue() {
+    this.setState({searchValue: ''})
   }
 
   addUser(userId) {
@@ -35,13 +48,16 @@ class SearchUsers extends React.Component {
 
   render() {
     const { fetchUsers, users, currentUser } = this.props
-    const { pendingOrRejected, accepted } = this.state
+    const { pendingOrRejected, accepted, searchValue } = this.state
 
     return (
       <View>
         <SearchBar
-          onChangeText={(input) => fetchUsers(input, currentUser.id)}
+          onChangeText={(input) => this.setSearchValue(input)}
+          onClearText={() => this.clearSearchValue()}
+          clearIcon
           icon={{ type: 'font-awesome', name: 'search' }}
+          value={searchValue}
           placeholder='Search for friends...'
         />
         {
