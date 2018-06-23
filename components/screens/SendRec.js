@@ -18,7 +18,6 @@ class SendRec extends React.Component {
       email: '',
       incorrectEmail: false,
       sender: {}
-      // recSent: false
     }
 
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -67,7 +66,6 @@ class SendRec extends React.Component {
         title: '',
         notes: '',
         incorrectEmail: false
-        // recSent: true
       })
     })
     .catch(err => {

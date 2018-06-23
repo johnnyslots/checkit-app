@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { fetchUsers } from '../redux/searchUsers';
 import axios from 'axios';
 import IP from '../../secrets';
+import socket from '../socket';
 
 class SearchUsers extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class SearchUsers extends React.Component {
     .then(res => res.data)
     .then(friendStatus => {
       if(friendStatus.status === 'pending' || friendStatus.status === 'rejected') {
+        socket.emit('friendRequest', {userId});
         this.setState({pendingOrRejected: [...this.state.pendingOrRejected, friendStatus.friendId]})
       }
       else if(friendStatus.status === 'accepted') {

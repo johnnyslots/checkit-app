@@ -25,16 +25,13 @@ export default class App extends React.Component {
   }
 
   nav(type) {
-    if(type === 'request') {
-      this.navigator && this.navigator.dispatch(
-        NavigationActions.navigate({ routeName: 'OpenRequests' })
-      );
-    }
-    else {
-      this.navigator && this.navigator.dispatch(
-        NavigationActions.navigate({ routeName: 'PendingRecs' })
-      );
-    }
+    let screen
+    if(type === 'newRecRequest') screen = 'OpenRequests'
+    else if(type === 'newRec') screen = 'PendingRecs'
+    else if(type === 'friendRequest') screen = 'PendingFriends'
+    console.log('type & screen!?!?', type, screen)
+    this.navigator && this.navigator.dispatch(
+      NavigationActions.navigate({ routeName: screen }))
   }
 
   render() {
