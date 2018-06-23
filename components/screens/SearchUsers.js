@@ -42,7 +42,7 @@ class SearchUsers extends React.Component {
         <SearchBar
           onChangeText={(input) => fetchUsers(input, currentUser.id)}
           icon={{ type: 'font-awesome', name: 'search' }}
-          placeholder='Search for friends by email...'
+          placeholder='Search for friends...'
         />
         {
           users.length ?
@@ -63,7 +63,6 @@ class SearchUsers extends React.Component {
                   iconName = 'add'
                   onPressFunc = (userId) => this.addUser(userId)
                 }
-                console.log('HELLLLO', iconName, onPressFunc)
                 return (
                   <View key={user.id}>
                     <ListItem

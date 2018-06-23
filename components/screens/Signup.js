@@ -8,25 +8,19 @@ class Signup extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
+      fullName: '',
       email: '',
       password: '',
       error: ''
     };
-    this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
-    this.handleChangeLastName = this.handleChangeLastName.bind(this);
+    this.handleChangeFullName = this.handleChangeFullName.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangeFirstName(value) {
-    this.setState({firstName: value});
-  }
-
-  handleChangeLastName(value) {
-    this.setState({lastName: value});
+  handleChangeFullName(value) {
+    this.setState({fullName: value});
   }
 
   handleChangeEmail(value) {
@@ -38,22 +32,18 @@ class Signup extends React.Component {
   }
 
   handleSubmit() {
-    if (this.state.firstName && this.state.lastName
-      && this.state.email && this.state.password) {
-      const firstName = this.state.firstName;
-      const lastName = this.state.lastName;
+    if (this.state.fullName && this.state.email && this.state.password) {
+      const fullName = this.state.fullName;
       const email = this.state.email;
       const password = this.state.password;
       this.props.signup({
-        firstName,
-        lastName,
+        fullName,
         email,
         password
       }, this.props.navigation);
       // clear the state after signup for security
       this.setState({
-        firstName: '',
-        lastName: '',
+        fullName: '',
         email: '',
         password: '',
         error: ''
@@ -71,30 +61,21 @@ class Signup extends React.Component {
     <KeyboardAvoidingView behavior="position" style={styles.container}>
       <ScrollView>
         <Text style={styles.error}>{this.state.error}</Text>
-        <Text style={styles.textLabel}>First Name</Text>
+        <Text style={styles.textLabel}>Full Name</Text>
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
           autoCorrect={false}
-          maxLength={15}
-          value={this.state.firstName}
-          onChangeText={(firstName) => this.handleChangeFirstName(firstName)}
-        />
-        <Text style={styles.textLabel}>Last Name</Text>
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          autoCorrect={false}
-          maxLength={15}
-          value={this.state.lastName}
-          onChangeText={(lastName) => this.handleChangeLastName(lastName)}
+          maxLength={30}
+          value={this.state.fullName}
+          onChangeText={(fullName) => this.handleChangeFullName(fullName)}
         />
         <Text style={styles.textLabel}>Email</Text>
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
           autoCorrect={false}
-          maxLength={15}
+          maxLength={30}
           value={this.state.email}
           onChangeText={(email) => this.handleChangeEmail(email)}
         />
