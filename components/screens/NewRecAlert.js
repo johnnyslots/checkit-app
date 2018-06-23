@@ -55,12 +55,6 @@ class NewRecAlert extends React.Component {
     if(type === 'newRecRequest') fetchRequests(user.id)
     else if(type === 'newRec') fetchPending(user.id)
     else if(type === 'friendRequest') fetchPendingFriends(user.id)
-    // if(type) {
-    //   fetchRequests(user.id)
-    // }
-    // else {
-    //   fetchPending(user.id)
-    // }
     nav(type);
     this.hideAlert();
   }

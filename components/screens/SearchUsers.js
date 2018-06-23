@@ -37,7 +37,6 @@ class SearchUsers extends React.Component {
     const { fetchUsers, users, currentUser } = this.props
     const { pendingOrRejected, accepted } = this.state
 
-
     return (
       <View>
         <SearchBar
@@ -50,52 +49,35 @@ class SearchUsers extends React.Component {
           <List>
             {
               users.map(user => {
+                let iconName
+                let onPressFunc
                 if(pendingOrRejected.indexOf(user.id) > -1) {
-                  return (
-                    <View key={user.id}>
-                      <ListItem
-                        title={user.fullName}
-                        rightIcon={
-                          <Icon
-                            name={'access-time'}
-                            size={20}
-                          />
-                        }
-                      />
-                    </View>
-                  )
+                  iconName = 'access-time'
+                  onPressFunc = null
                 }
                 else if(accepted.indexOf(user.id) > -1) {
-                  return (
-                    <View key={user.id}>
-                      <ListItem
-                        title={user.fullName}
-                        rightIcon={
-                          <Icon
-                            name={'check'}
-                            size={20}
-                          />
-                        }
-                      />
-                    </View>
-                  )
+                  iconName = 'check'
+                  onPressFunc = null
                 }
                 else {
-                  return (
-                    <View key={user.id}>
-                      <ListItem
-                        title={user.fullName}
-                        rightIcon={
-                          <Icon
-                            name={'add'}
-                            size={20}
-                            onPress={() => this.addUser(user.id)}
-                          />
-                        }
-                      />
-                    </View>
-                  )
+                  iconName = 'add'
+                  onPressFunc = (userId) => this.addUser(userId)
                 }
+                console.log('HELLLLO', iconName, onPressFunc)
+                return (
+                  <View key={user.id}>
+                    <ListItem
+                      title={user.fullName}
+                      rightIcon={
+                        <Icon
+                          name={iconName}
+                          size={20}
+                          onPress={() => onPressFunc(user.id)}
+                        />
+                      }
+                    />
+                  </View>
+                )
               })
             }
           </List>
