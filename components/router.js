@@ -13,6 +13,7 @@ import PendingRecs from './screens/PendingRecs';
 import OpenRequests from './screens/OpenRequests';
 import FulfillRequest from './screens/FulfillRequest';
 import PendingFriends from './screens/PendingFriends';
+import SearchAcceptedFriends from './screens/SearchAcceptedFriends';
 
 export const SignedOut = StackNavigator({
   Login: {
@@ -66,6 +67,12 @@ const Lists = StackNavigator({
 })
 
 const NewRecStack = StackNavigator({
+  SearchAcceptedFriends: {
+    screen: SearchAcceptedFriends,
+    navigationOptions: {
+      title: 'Search Friends'
+    }
+  },
   NewRec: {
     screen: NewRec,
     navigationOptions: {

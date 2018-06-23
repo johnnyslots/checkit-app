@@ -5,6 +5,7 @@ import listByCategory from './listByCategory';
 import pendingRecs from './pendingRecs';
 import openRequests from './openRequests';
 import pendingFriends from './pendingFriends';
+import acceptedFriends from './acceptedFriends'
 import users from './searchUsers';
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
   pendingRecs,
   openRequests,
   pendingFriends,
+  acceptedFriends,
   users
 });
