@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { getRecommendedAtDate } from '../utils';
+import TimeAgo from 'react-native-timeago';
 import { updatePendingRec, deletePendingRec } from '../redux/pendingRecs';
 
 class PendingRecs extends React.Component {
@@ -15,11 +15,12 @@ class PendingRecs extends React.Component {
           {
             pendingRecs.length ?
             pendingRecs.map(rec => {
-              const recommendedAt = getRecommendedAtDate(rec.createdAt)
               return (
                 <View key={rec.id}>
                   <Text>{rec.item.title}</Text>
-                  <Text>Recommended by {rec.from.fullName} on {recommendedAt}</Text>
+                  <Text>Recommended by {rec.from.fullName}</Text>
+                  <TimeAgo time={rec.createdAt} />
+
                   {
                     rec.notes
                     ? <Text>Notes: {rec.notes}</Text>
