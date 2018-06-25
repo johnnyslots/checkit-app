@@ -22,7 +22,7 @@ export default class NewRec extends React.Component {
 
     const buttons = ['Send', 'Request']
     const { selectedIndex } = this.state
-
+    const { friend } = this.props.navigation.state.params
 
     return (
       <View style={styles.container}>
@@ -33,7 +33,7 @@ export default class NewRec extends React.Component {
           containerStyle={{backgroundColor: 'green'}}
         />
         {
-          selectedIndex ? <SendRec /> : <RequestRec />
+          selectedIndex ? <SendRec friend={friend} /> : <RequestRec friend={friend} />
         }
       </View>
     )

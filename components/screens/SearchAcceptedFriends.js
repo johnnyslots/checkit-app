@@ -12,6 +12,7 @@ class SearchAcceptedFriends extends React.Component {
     }
     this.setSearchValue = this.setSearchValue.bind(this);
     this.clearSearchValue = this.clearSearchValue.bind(this);
+    this.handleFriendSelection = this.handleFriendSelection.bind(this);
   }
 
   setSearchValue(input) {
@@ -24,10 +25,13 @@ class SearchAcceptedFriends extends React.Component {
     this.setState({searchValue: ''})
   }
 
+  handleFriendSelection(friend) {
+    this.props.navigation.navigate('NewRec', {friend})
+  }
+
   render() {
     const { fetchFriends, friends, currentUser } = this.props
     const { searchValue } = this.state
-    console.log('friends!!!!!!', friends)
 
     return (
       <View>
@@ -48,9 +52,9 @@ class SearchAcceptedFriends extends React.Component {
                   title={friend.fullName}
                   rightIcon={
                     <Icon
-                      name='add'
+                      name='send'
                       size={20}
-                      onPress={() => null}
+                      onPress={() => this.handleFriendSelection(friend)}
                     />
                   }
                 />

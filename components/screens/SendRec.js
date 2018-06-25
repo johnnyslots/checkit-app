@@ -16,28 +16,25 @@ class SendRec extends React.Component {
       title: '',
       notes: '',
       email: '',
-      incorrectEmail: false,
       sender: {}
     }
 
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleNotesChange = this.handleNotesChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    this.setState({sender: this.props.sender})
+    this.setState({
+      sender: this.props.sender,
+      email: this.props.friend.email
+    })
   }
 
   handleCategoryChange(category) {
     const lowerCaseCategory = category.toLowerCase();
     this.setState({category: lowerCaseCategory});
-  }
-
-  handleEmailChange(email) {
-    this.setState({email});
   }
 
   handleTitleChange(title) {
@@ -62,20 +59,15 @@ class SendRec extends React.Component {
     .then(() => {
       socket.emit('newRec', this.state);
       this.setState({
-        email: '',
         title: '',
-        notes: '',
-        incorrectEmail: false
+        notes: ''
       })
     })
-    .catch(err => {
-      this.setState({incorrectEmail: true})
-      console.log(err)
-    })
-  }
+    .catch(err => console.log(err)
+  )}
 
   render() {
-
+    const { friend } = this.props
     const categories = [{
       value: 'Books',
     }, {
@@ -88,24 +80,13 @@ class SendRec extends React.Component {
 
     return (
       <View>
-        <Text>SEND REC</Text>
+        <Text>SEND RECOMMENDATION TO {friend.fullName}</Text>
         <Dropdown
           label='Category'
           data={categories}
           // containerStyle={sendRecStyles.input}
           onChangeText={this.handleCategoryChange}
         />
-        <TextField
-          // containerStyle={sendRecStyles.input}
-          onChangeText={this.handleEmailChange}
-          value={this.state.email}
-          label="Send to (email)"
-        />
-        {
-          this.state.incorrectEmail ?
-          <Text>User doesn't exist</Text>
-          : null
-        }
         <TextField
           // containerStyle={sendRecStyles.input}
           onChangeText={this.handleTitleChange}
