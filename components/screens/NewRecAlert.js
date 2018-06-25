@@ -75,7 +75,7 @@ class NewRecAlert extends React.Component {
             showProgress={false}
             title={alert}
             message="Do you want to see more details?"
-            closeOnTouchOutside={true}
+            closeOnTouchOutside={false}
             closeOnHardwareBackPress={false}
             showCancelButton={true}
             showConfirmButton={true}

@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
 import { TextField } from 'react-native-material-textfield';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import IP from '../../secrets';
@@ -16,7 +17,7 @@ class RequestRec extends React.Component {
       message: '',
       email: '',
       sender: {},
-      // requestSent: false
+      displayNotification: false
     }
 
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -54,9 +55,10 @@ class RequestRec extends React.Component {
     .then(() => {
       socket.emit('newRecRequest', (this.state));
       this.setState({
-        message: ''
-        // recSent: true
+        message: '',
+        displayNotification: true
       })
+      setTimeout(() => {this.setState({displayNotification: false})}, 1500)
     })
     .catch(err => console.log(err)
   )}
@@ -70,8 +72,9 @@ class RequestRec extends React.Component {
     }, {
       value: 'Podcasts',
     }, {
-      value: 'TV Shows',
+      value: 'TV Shows'
     }];
+    var checkmark = '\u2714'
 
     return (
       <View>
@@ -91,6 +94,14 @@ class RequestRec extends React.Component {
         <Button
           title="Send"
           onPress={this.handleSubmit}
+        />
+        <AwesomeAlert
+          show={this.state.displayNotification}
+          showProgress={false}
+          title='Sent!'
+          message={checkmark}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
         />
       </View>
     )

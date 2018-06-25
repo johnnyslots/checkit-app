@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
 import { TextField } from 'react-native-material-textfield';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import IP from '../../secrets';
@@ -16,7 +17,8 @@ class SendRec extends React.Component {
       title: '',
       notes: '',
       email: '',
-      sender: {}
+      sender: {},
+      displayNotification: false
     }
 
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -60,8 +62,10 @@ class SendRec extends React.Component {
       socket.emit('newRec', this.state);
       this.setState({
         title: '',
-        notes: ''
+        notes: '',
+        displayNotification: true
       })
+      setTimeout(() => {this.setState({displayNotification: false})}, 1500)
     })
     .catch(err => console.log(err)
   )}
@@ -75,8 +79,9 @@ class SendRec extends React.Component {
     }, {
       value: 'Podcasts',
     }, {
-      value: 'TV Shows',
+      value: 'TV Shows'
     }];
+    var checkmark = '\u2714'
 
     return (
       <View>
@@ -102,6 +107,14 @@ class SendRec extends React.Component {
         <Button
           title="Send"
           onPress={this.handleSubmit}
+        />
+        <AwesomeAlert
+          show={this.state.displayNotification}
+          showProgress={false}
+          title='Sent!'
+          message={checkmark}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
         />
       </View>
     )
