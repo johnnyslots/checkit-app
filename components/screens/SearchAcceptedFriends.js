@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { SearchBar, Icon } from 'react-native-elements';
+import { SearchBar, Icon, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchFriends } from '../redux/acceptedFriends';
 
@@ -25,8 +25,9 @@ class SearchAcceptedFriends extends React.Component {
   }
 
   render() {
-    const { fetchFriends, users, currentUser } = this.props
+    const { fetchFriends, friends, currentUser } = this.props
     const { searchValue } = this.state
+    console.log('friends!!!!!!', friends)
 
     return (
       <View>
@@ -38,6 +39,26 @@ class SearchAcceptedFriends extends React.Component {
           value={searchValue}
           placeholder='Search'
         />
+        <List>
+        {
+          friends.map(friend => {
+            return (
+              <View key={friend.id}>
+                <ListItem
+                  title={friend.fullName}
+                  rightIcon={
+                    <Icon
+                      name='add'
+                      size={20}
+                      onPress={() => null}
+                    />
+                  }
+                />
+              </View>
+            )
+          })
+        }
+        </List>
       </View>
     )
   }
@@ -45,7 +66,7 @@ class SearchAcceptedFriends extends React.Component {
 
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
-  users: state.users
+  friends: state.acceptedFriends
 })
 
 const mapDispatchToProps = dispatch => ({
