@@ -18,7 +18,9 @@ class SendRec extends React.Component {
       notes: '',
       email: '',
       sender: {},
-      displayNotification: false
+      displayNotification: false,
+      emptyCategory: false,
+      emptyTitle: false
     }
 
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -35,11 +37,17 @@ class SendRec extends React.Component {
   }
 
   handleCategoryChange(category) {
+    if(this.state.emptyCategory) {
+      this.setState({emptyCategory: false})
+    }
     const lowerCaseCategory = category.toLowerCase();
     this.setState({category: lowerCaseCategory});
   }
 
   handleTitleChange(title) {
+    if(this.state.emptyTitle) {
+      this.setState({emptyTitle: false})
+    }
     this.setState({title});
   }
 
@@ -48,29 +56,39 @@ class SendRec extends React.Component {
   }
 
   handleSubmit() {
-    const userEmail = this.state.email.toLowerCase();
-    const recInfo = this.state
-    axios.get(`${IP}/api/users/${userEmail}`)
-    .then(res => {
-      if(res.data.email) {
-        const toId = res.data.id
-        return axios.post(`${IP}/api/recommendations`, {recInfo, toId})
-        .catch(err => console.log(err))
-      }
-    })
-    .then(() => {
-      socket.emit('newRec', this.state);
-      this.setState({
-        title: '',
-        notes: '',
-        displayNotification: true
+    const { category, title } = this.state
+    if(!category) {
+      this.setState({emptyCategory: true})
+    }
+    if(!title) {
+      this.setState({emptyTitle: true})
+    }
+    else if(category && title) {
+      const userEmail = this.state.email.toLowerCase();
+      const recInfo = this.state
+      axios.get(`${IP}/api/users/${userEmail}`)
+      .then(res => {
+        if(res.data.email) {
+          const toId = res.data.id
+          return axios.post(`${IP}/api/recommendations`, {recInfo, toId})
+          .catch(err => console.log(err))
+        }
       })
-      setTimeout(() => {this.setState({displayNotification: false})}, 1500)
-    })
-    .catch(err => console.log(err)
-  )}
+      .then(() => {
+        socket.emit('newRec', this.state);
+        this.setState({
+          title: '',
+          notes: '',
+          displayNotification: true
+        })
+        setTimeout(() => {this.setState({displayNotification: false})}, 1500)
+      })
+      .catch(err => console.log(err)
+    )}
+  }
 
   render() {
+    const { emptyCategory, emptyTitle } = this.state
     const { friend } = this.props
     const categories = [{
       value: 'Books',
@@ -81,7 +99,7 @@ class SendRec extends React.Component {
     }, {
       value: 'TV Shows'
     }];
-    var checkmark = '\u2714'
+    const checkmark = '\u2714'
 
     return (
       <View>
@@ -92,12 +110,18 @@ class SendRec extends React.Component {
           // containerStyle={sendRecStyles.input}
           onChangeText={this.handleCategoryChange}
         />
+        {
+          emptyCategory ? <Text>Category can't be empty</Text> : null
+        }
         <TextField
           // containerStyle={sendRecStyles.input}
           onChangeText={this.handleTitleChange}
           value={this.state.title}
           label="Title"
         />
+        {
+          emptyTitle ? <Text>Title can't be empty</Text> : null
+        }
         <TextField
           // containerStyle={sendRecStyles.input}
           onChangeText={this.handleNotesChange}

@@ -17,7 +17,8 @@ class RequestRec extends React.Component {
       message: '',
       email: '',
       sender: {},
-      displayNotification: false
+      displayNotification: false,
+      emptyCategory: false
     }
 
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -33,6 +34,9 @@ class RequestRec extends React.Component {
   }
 
   handleCategoryChange(category) {
+    if(this.state.emptyCategory) {
+      this.setState({emptyCategory: false})
+    }
     const lowerCaseCategory = category.toLowerCase();
     this.setState({category: lowerCaseCategory});
   }
@@ -42,28 +46,34 @@ class RequestRec extends React.Component {
   }
 
   handleSubmit() {
-    const userEmail = this.state.email.toLowerCase();
-    const requestInfo = this.state
-    axios.get(`${IP}/api/users/${userEmail}`)
-    .then(res => {
-      if(res.data.email) {
-        const toId = res.data.id
-        return axios.post(`${IP}/api/requests`, {requestInfo, toId})
-        .catch(err => console.log(err))
-      }
-    })
-    .then(() => {
-      socket.emit('newRecRequest', (this.state));
-      this.setState({
-        message: '',
-        displayNotification: true
+    if(!this.state.category) {
+      this.setState({emptyCategory: true})
+    }
+    else {
+      const userEmail = this.state.email.toLowerCase();
+      const requestInfo = this.state
+      axios.get(`${IP}/api/users/${userEmail}`)
+      .then(res => {
+        if(res.data.email) {
+          const toId = res.data.id
+          return axios.post(`${IP}/api/requests`, {requestInfo, toId})
+          .catch(err => console.log(err))
+        }
       })
-      setTimeout(() => {this.setState({displayNotification: false})}, 1500)
-    })
-    .catch(err => console.log(err)
-  )}
+      .then(() => {
+        socket.emit('newRecRequest', (this.state));
+        this.setState({
+          message: '',
+          displayNotification: true
+        })
+        setTimeout(() => {this.setState({displayNotification: false})}, 1500)
+      })
+      .catch(err => console.log(err)
+    )}
+  }
 
   render() {
+    const { emptyCategory } = this.state
     const { friend } = this.props
     const categories = [{
       value: 'Books',
@@ -74,7 +84,7 @@ class RequestRec extends React.Component {
     }, {
       value: 'TV Shows'
     }];
-    var checkmark = '\u2714'
+    const checkmark = '\u2714'
 
     return (
       <View>
@@ -85,6 +95,9 @@ class RequestRec extends React.Component {
           // containerStyle={sendRecStyles.input}
           onChangeText={this.handleCategoryChange}
         />
+        {
+          emptyCategory ? <Text>Category can't be empty</Text> : null
+        }
         <TextField
           // containerStyle={sendRecStyles.input}
           onChangeText={this.handleMessageChange}

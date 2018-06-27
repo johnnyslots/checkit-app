@@ -93,7 +93,6 @@ class NewRecAlert extends React.Component {
         </View>
       )
     }
-
     else return null
   }
 }

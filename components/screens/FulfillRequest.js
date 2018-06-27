@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Button } from 'react-native-elements';
 import { TextField } from 'react-native-material-textfield';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import IP from '../../secrets';
@@ -18,7 +19,9 @@ class FulfillRequest extends React.Component {
       notes: '',
       email: '',
       toId: null,
-      sender: {}
+      sender: {},
+      displayNotification: false,
+      emptyTitle: false
     }
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleNotesChange = this.handleNotesChange.bind(this);
@@ -38,6 +41,9 @@ class FulfillRequest extends React.Component {
   }
 
   handleTitleChange(title) {
+    if(this.state.title) {
+      this.setState({emptyTitle: false})
+    }
     this.setState({title});
   }
 
@@ -56,6 +62,11 @@ class FulfillRequest extends React.Component {
   }
 
   handleSubmit() {
+    if(!this.state.title) {
+      this.setState({emptyTitle: true})
+    }
+    else {
+
     const recInfo = this.state
     axios.post(`${IP}/api/recommendations`, {recInfo})
     .then(() => {
@@ -67,16 +78,23 @@ class FulfillRequest extends React.Component {
         notes: '',
         email: '',
         toId: null,
-        sender: {}
+        sender: {},
+        displayNotification: true
       })
-      this.resetNavigation('MyLists')
+      let that = this
+      setTimeout(() => {
+        that.setState({displayNotification: false})
+        this.resetNavigation('MyLists')
+      }, 1500)
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err)
+    )}
   }
 
   render() {
 
-    const { email, category } = this.state
+    const { email, category, emptyTitle } = this.state
+    const checkmark = '\u2714'
 
     return (
       <View>
@@ -89,6 +107,9 @@ class FulfillRequest extends React.Component {
           value={this.state.title}
           label="Title"
         />
+        {
+          emptyTitle ? <Text>Title can't be empty</Text> : null
+        }
         <TextField
           // containerStyle={sendRecStyles.input}
           onChangeText={this.handleNotesChange}
@@ -98,6 +119,14 @@ class FulfillRequest extends React.Component {
         <Button
           title="Send"
           onPress={this.handleSubmit}
+        />
+        <AwesomeAlert
+          show={this.state.displayNotification}
+          showProgress={false}
+          title='Sent!'
+          message={checkmark}
+          closeOnTouchOutside={false}
+          closeOnHardwareBackPress={false}
         />
       </View>
     )
