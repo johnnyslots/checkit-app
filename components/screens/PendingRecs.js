@@ -17,34 +17,21 @@ class PendingRecs extends React.Component {
   handleAddRecPress(recId, pendingRecs) {
     const { acceptRec } = this.props
     acceptRec(recId, pendingRecs)
-    // this.setState({displayNotification: true})
-    // setTimeout(() => {this.setState({displayNotification: true})}, 500)
-    // setTimeout(() => {this.setState({displayNotification: false})}, 2000)
+    .then(() => {
+      this.setState({displayNotification: true})
+      setTimeout(() => {this.setState({displayNotification: false})}, 2000)
+    })
+    .catch(err => console.log(err))
+
   }
-
-  componentDidUpdate(prevProps, prevState) {
-    if(prevProps.navigation.state.params.pendingRecs.length === this.props.pendingRecs.length + 1) {
-      console.log('PREVIOUS STATE', prevProps.navigation.state.params.pendingRecs.length, this.props.pendingRecs.length)
-
-
-      // this.setState({displayNotification: true})
-      // setTimeout(() => {this.setState({displayNotification: false})}, 1500)
-    }
-  }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('nextState!!!', nextState, this.state)
-  //   return this.state.displayNotification === nextState.displayNotification
-  // }
-
 
   render() {
-
     const { pendingRecs, deleteRec } = this.props;
     const checkmark = '\u2714'
 
     return (
-      <ScrollView>
+      <View>
+        <ScrollView>
           {
             pendingRecs.length ?
             pendingRecs.map(rec => {
@@ -76,6 +63,7 @@ class PendingRecs extends React.Component {
               <Text>You have no pending recommendations!</Text>
             </View>
           }
+        </ScrollView>
         <AwesomeAlert
           show={this.state.displayNotification}
           showProgress={false}
@@ -84,7 +72,7 @@ class PendingRecs extends React.Component {
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
         />
-      </ScrollView>
+      </View>
     )
   }
 }

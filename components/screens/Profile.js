@@ -31,9 +31,15 @@ class Profile extends React.Component {
           />
           <Button
             backgroundColor='red'
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1, marginTop: 1}}
             title='Open Requests'
             onPress={() => fetchRequests(user.id, navigation)} />
+          />
+          <Button
+            backgroundColor='grey'
+            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+            title='Edit Profile'
+            onPress={() => navigation.navigate('EditProfile')} />
           />
         </Card>
       </View>

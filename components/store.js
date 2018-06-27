@@ -9,3 +9,4 @@ export default createStore(
   rootReducer,
   applyMiddleware(thunkMiddleware, loggerMiddleware)
 );
+

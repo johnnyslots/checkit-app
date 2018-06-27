@@ -22,7 +22,7 @@ export const fetchPendingRecs = (userId, navigation) => dispatch => {
 }
 
 export const updatePendingRec = (recId, allPendingRecs) => dispatch => {
-  axios.put(`${IP}/api/recommendations/pending/${recId}`)
+  return axios.put(`${IP}/api/recommendations/pending/${recId}`)
   .then(res => res.data)
   .then(acceptedRec => {
     const remainingRecs = allPendingRecs.filter(rec => {
