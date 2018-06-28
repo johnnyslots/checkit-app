@@ -70,7 +70,7 @@ const NewRecStack = StackNavigator({
   SearchAcceptedFriends: {
     screen: SearchAcceptedFriends,
     navigationOptions: {
-      title: 'Search Friends'
+      title: 'New Recommendation'
     }
   },
   NewRec: {
@@ -126,7 +126,7 @@ export const SignedIn = TabNavigator(
       activeTintColor: 'red',
       inactiveTintColor: 'gray',
       labelStyle: {
-        fontSize: 13
+        fontSize: 12
       }
     },
     tabBarComponent: TabBarBottom,
@@ -159,3 +159,4 @@ export const createRootNavigator = (signedIn = false) => {
     }
   );
 };
+

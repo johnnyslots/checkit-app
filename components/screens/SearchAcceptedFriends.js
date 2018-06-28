@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { SearchBar, Icon, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { fetchFriends } from '../redux/acceptedFriends';
+import { fetchFilteredFriends, fetchAllFriends } from '../redux/acceptedFriends';
 
 class SearchAcceptedFriends extends React.Component {
   constructor(props) {
@@ -15,14 +15,26 @@ class SearchAcceptedFriends extends React.Component {
     this.handleFriendSelection = this.handleFriendSelection.bind(this);
   }
 
+  componentDidMount() {
+    const { fetchAllFriends, currentUser } = this.props
+    fetchAllFriends(currentUser.id)
+  }
+
   setSearchValue(input) {
-    const { fetchFriends, currentUser } = this.props
-    this.setState({searchValue: input})
-    fetchFriends(input, currentUser.id)
+    const { fetchFilteredFriends, fetchAllFriends, currentUser } = this.props
+    if(!input) {
+      fetchAllFriends(currentUser.id)
+    }
+    else {
+      this.setState({searchValue: input})
+      fetchFilteredFriends(input, currentUser.id)
+    }
   }
 
   clearSearchValue() {
     this.setState({searchValue: ''})
+    const { fetchAllFriends, currentUser } = this.props
+    fetchAllFriends(currentUser.id)
   }
 
   handleFriendSelection(friend) {
@@ -30,7 +42,7 @@ class SearchAcceptedFriends extends React.Component {
   }
 
   render() {
-    const { fetchFriends, friends, currentUser } = this.props
+    const { friends, currentUser } = this.props
     const { searchValue } = this.state
 
     return (
@@ -74,7 +86,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchFriends: (input, currentUserId) => dispatch(fetchFriends(input, currentUserId))
+  fetchFilteredFriends: (input, currentUserId) => dispatch(fetchFilteredFriends(input, currentUserId)),
+  fetchAllFriends: (currentUserId) => dispatch(fetchAllFriends(currentUserId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchAcceptedFriends)

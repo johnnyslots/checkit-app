@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { fetchPendingRecs } from '../redux/pendingRecs';
 import { fetchOpenRequests } from '../redux/openRequests';
 
-
 class Profile extends React.Component {
 
   render() {
@@ -19,13 +18,14 @@ class Profile extends React.Component {
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1}}
             title='Pending Recommendations'
-            onPress={() => fetchPending(user.id, navigation)} />
+            onPress={() => fetchPending(user.id, navigation)}
           />
+
           <Button
             backgroundColor='red'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1, marginTop: 1}}
             title='Open Requests'
-            onPress={() => fetchRequests(user.id, navigation)} />
+            onPress={() => fetchRequests(user.id, navigation)}
           />
         </Card>
       </View>
