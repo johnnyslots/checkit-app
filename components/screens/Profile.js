@@ -15,14 +15,6 @@ class Profile extends React.Component {
     return (
       <View >
         <Card title={user.fullName}>
-          <Avatar
-            medium
-            rounded
-            source={{uri: "https://thesocietypages.org/socimages/files/2009/05/vimeo.jpg"}}
-            onPress={() => console.log("Works!")}
-            activeOpacity={0.7}
-            containerStyle={{marginLeft: '40%', marginBottom: 20, marginTop: 10}}
-          />
           <Button
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1}}
@@ -34,12 +26,6 @@ class Profile extends React.Component {
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1, marginTop: 1}}
             title='Open Requests'
             onPress={() => fetchRequests(user.id, navigation)} />
-          />
-          <Button
-            backgroundColor='grey'
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='Edit Profile'
-            onPress={() => navigation.navigate('EditProfile')} />
           />
         </Card>
       </View>

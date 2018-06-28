@@ -19,7 +19,7 @@ class PendingRecs extends React.Component {
     acceptRec(recId, pendingRecs)
     .then(() => {
       this.setState({displayNotification: true})
-      setTimeout(() => {this.setState({displayNotification: false})}, 2000)
+      setTimeout(() => {this.setState({displayNotification: false})}, 1500)
     })
     .catch(err => console.log(err))
 

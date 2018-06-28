@@ -11,7 +11,6 @@ import FindFriends from './screens/FindFriends';
 import RecDetails from './screens/RecDetails';
 import PendingRecs from './screens/PendingRecs';
 import OpenRequests from './screens/OpenRequests';
-import EditProfile from './screens/EditProfile';
 import FulfillRequest from './screens/FulfillRequest';
 import PendingFriends from './screens/PendingFriends';
 import SearchAcceptedFriends from './screens/SearchAcceptedFriends';
@@ -48,12 +47,6 @@ const Lists = StackNavigator({
     screen: OpenRequests,
     navigationOptions: {
       title: 'Open Requests'
-    }
-  },
-  EditProfile: {
-    screen: EditProfile,
-    navigationOptions: {
-      title: 'Edit Profile'
     }
   },
   FulfillRequest: {
