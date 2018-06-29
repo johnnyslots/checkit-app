@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Button, Text as ElementsText } from 'react-native-elements';
 import { connect } from 'react-redux';
-
 import { login } from '../redux/auth';
+import LoginIcons from './LoginIcons';
 
 class Login extends React.Component {
   constructor(props){
@@ -43,39 +44,41 @@ class Login extends React.Component {
   render() {
    return (
     <KeyboardAvoidingView behavior="position" style={styles.container}>
+      <ElementsText h1 style={styles.header}>CheckIt</ElementsText>
+      <LoginIcons />
       <ScrollView>
         <Text style={styles.error}>{this.state.error}</Text>
-        <Text style={styles.textLabel}>Email</Text>
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
           autoCorrect={false}
           maxLength={30}
-          placeholder="EMAIL"
-          placeholderTextColor="tomato"
+          placeholder="Email"
+          placeholderTextColor="gray"
           value={this.state.email}
           onChangeText={(email) => this.handleChangeEmail(email)}
         />
-        <Text style={styles.textLabel}>Password</Text>
         <TextInput
           style={styles.textInput}
           secureTextEntry={true}
           autoCapitalize="none"
           autoCorrect={false}
           maxLength={15}
-          placeholder="PASSWORD"
-          placeholderTextColor="tomato"
+          placeholder="Password"
+          placeholderTextColor="gray"
           value={this.state.password}
           onChangeText={(password) => this.handleChangePassword(password)}
         />
         <Button
           buttonStyle={styles.button}
-          title="Login"
+          textStyle={styles.buttonText}
+          title="Continue"
           onPress={this.handleSubmit}
         />
         <Button
           buttonStyle={styles.button}
-          title="Sign Up"
+          textStyle={styles.buttonText}
+          title="No account? Sign up!"
           onPress={() => {
             this.props.navigation.navigate('Signup');
             this.setState({
@@ -99,38 +102,52 @@ export default connect(null, mapDispatchToProps)(Login);
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    justifyContent: 'center',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
     backgroundColor: 'white',
-    paddingHorizontal: 5,
+    paddingTop: 35,
+    // paddingHorizontal: 25,
     flex: 1
   },
-  textLabel: {
-    fontSize: 20,
-    marginTop: 10,
-    padding: 10
+  header: {
+    alignSelf: 'center'
   },
+  // icons: {
+  //   alignSelf: 'center',
+  //   backgroundColor: 'red'
+  // },
+  // textLabel: {
+  //   fontSize: 15,
+  //   marginTop: 10,
+  //   padding: 10
+  // },
   textInput: {
     height: 40,
     width: 300,
-    margin: 10,
-    color: 'tomato',
+    margin: 5,
+    color: 'black',
     fontSize: 15,
-    borderWidth: 2,
-    borderRadius: 5
+    // borderWidth: 1,
+    borderBottomWidth: 1,
+    borderRadius: 5,
+    alignSelf: 'center',
   },
   button: {
     backgroundColor: 'gray',
-    width: 150,
-    height: 40,
+    width: '85%',
+    height: 45,
     borderRadius: 5,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    margin: 4
   },
-  error: {
-    fontSize: 15,
-    color: 'blue',
-    marginVertical: 0,
-    paddingLeft: 10,
-    fontWeight: 'bold'
+  buttonText: {
+    fontSize: 15
   }
+  // error: {
+  //   fontSize: 15,
+  //   color: 'blue',
+  //   marginVertical: 0,
+  //   paddingLeft: 10,
+  //   fontWeight: 'bold'
+  // }
 });

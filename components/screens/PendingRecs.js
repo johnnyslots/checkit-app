@@ -9,7 +9,8 @@ class PendingRecs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayNotification: false
+      displayNotification: false,
+      test: true
     }
     this.handleAddRecPress = this.handleAddRecPress.bind(this)
   }
@@ -19,10 +20,10 @@ class PendingRecs extends React.Component {
     acceptRec(recId, pendingRecs)
     .then(() => {
       this.setState({displayNotification: true})
-      setTimeout(() => {this.setState({displayNotification: false})}, 1500)
+      // setTimeout(() => {this.setState({displayNotification: false})}, 1500)
+      this.setState({test: false})
     })
     .catch(err => console.log(err))
-
   }
 
   render() {

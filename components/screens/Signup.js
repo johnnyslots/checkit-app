@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Button, Text as ElementsText } from 'react-native-elements';
 import { connect } from 'react-redux';
-
 import { signup } from '../redux/auth';
+import LoginIcons from './LoginIcons';
 
 class Signup extends React.Component {
   constructor(props){
@@ -59,6 +60,8 @@ class Signup extends React.Component {
   render() {
    return (
     <KeyboardAvoidingView behavior="position" style={styles.container}>
+      <ElementsText h1>CheckIt</ElementsText>
+      <LoginIcons />
       <ScrollView>
         <Text style={styles.error}>{this.state.error}</Text>
         <Text style={styles.textLabel}>Full Name</Text>
@@ -91,7 +94,7 @@ class Signup extends React.Component {
         />
         <Button
           buttonStyle={styles.button}
-          title="Sign Up"
+          title="Continue"
           onPress={this.handleSubmit}
         />
       </ScrollView>
@@ -109,7 +112,7 @@ export default connect(null, mapDispatchToProps)(Signup);
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     backgroundColor: 'white',
     paddingHorizontal: 5,
     flex: 1
