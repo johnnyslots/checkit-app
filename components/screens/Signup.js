@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { Button, Text as ElementsText } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { signup } from '../redux/auth';
@@ -60,40 +60,51 @@ class Signup extends React.Component {
   render() {
    return (
     <KeyboardAvoidingView behavior="position" style={styles.container}>
-      <ElementsText h1>CheckIt</ElementsText>
+      <View style={styles.header}>
+        <ElementsText h1>
+          Check
+            <ElementsText h1 style={styles.headerIt}>
+            It
+            </ElementsText>
+          </ElementsText>
+      </View>
       <LoginIcons />
       <ScrollView>
         <Text style={styles.error}>{this.state.error}</Text>
-        <Text style={styles.textLabel}>Full Name</Text>
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
           autoCorrect={false}
           maxLength={30}
+          placeholder="Full Name"
+          placeholderTextColor="gray"
           value={this.state.fullName}
           onChangeText={(fullName) => this.handleChangeFullName(fullName)}
         />
-        <Text style={styles.textLabel}>Email</Text>
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
           autoCorrect={false}
           maxLength={30}
+          placeholder="Email"
+          placeholderTextColor="gray"
           value={this.state.email}
           onChangeText={(email) => this.handleChangeEmail(email)}
         />
-        <Text style={styles.textLabel}>Password</Text>
         <TextInput
           style={styles.textInput}
           secureTextEntry={true}
           autoCapitalize="none"
           autoCorrect={false}
           maxLength={15}
+          placeholder="Password"
+          placeholderTextColor="gray"
           value={this.state.password}
           onChangeText={(password) => this.handleChangePassword(password)}
         />
         <Button
           buttonStyle={styles.button}
+          textStyle={styles.buttonText}
           title="Continue"
           onPress={this.handleSubmit}
         />
@@ -111,38 +122,44 @@ export default connect(null, mapDispatchToProps)(Signup);
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    // justifyContent: 'center',
+    justifyContent: 'center',
     backgroundColor: 'white',
-    paddingHorizontal: 5,
     flex: 1
   },
-  textLabel: {
-    fontSize: 20,
-    marginTop: 10,
-    padding: 10
+  header: {
+    alignSelf: 'center'
+  },
+  headerIt: {
+    color: '#008242'
   },
   textInput: {
     height: 40,
     width: 300,
-    margin: 10,
-    color: 'tomato',
+    margin: 5,
+    color: 'black',
     fontSize: 15,
-    borderWidth: 2,
-    borderRadius: 5
+    borderBottomWidth: 1,
+    borderRadius: 5,
+    alignSelf: 'center',
+  },
+  buttonContainer: {
+    marginTop: 5
   },
   button: {
-    backgroundColor: 'gray',
-    width: 150,
-    height: 40,
+    backgroundColor: '#008242',
+    width: '85%',
+    height: 45,
     borderRadius: 5,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    margin: 4
+  },
+  buttonText: {
+    fontSize: 15
   },
   error: {
     fontSize: 15,
-    color: 'blue',
-    marginVertical: 0,
-    paddingLeft: 10,
+    color: 'red',
+    alignSelf: 'center',
     fontWeight: 'bold'
   }
 });

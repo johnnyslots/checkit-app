@@ -44,7 +44,14 @@ class Login extends React.Component {
   render() {
    return (
     <KeyboardAvoidingView behavior="position" style={styles.container}>
-      <ElementsText h1 style={styles.header}>CheckIt</ElementsText>
+      <View style={styles.header}>
+        <ElementsText h1>
+          Check
+            <ElementsText h1 style={styles.headerIt}>
+            It
+            </ElementsText>
+          </ElementsText>
+      </View>
       <LoginIcons />
       <ScrollView>
         <Text style={styles.error}>{this.state.error}</Text>
@@ -90,7 +97,6 @@ class Login extends React.Component {
               });
             }}
           />
-
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -112,6 +118,9 @@ const styles = StyleSheet.create({
   },
   header: {
     alignSelf: 'center'
+  },
+  headerIt: {
+    color: '#008242'
   },
   textInput: {
     height: 40,
