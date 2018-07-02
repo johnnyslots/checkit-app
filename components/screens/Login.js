@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet, Text, TextInput, KeyboardAvoidingView, ScrollView, View } from 'react-native';
 import { Button, Text as ElementsText } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { login } from '../redux/auth';
@@ -69,25 +69,29 @@ class Login extends React.Component {
           value={this.state.password}
           onChangeText={(password) => this.handleChangePassword(password)}
         />
-        <Button
-          buttonStyle={styles.button}
-          textStyle={styles.buttonText}
-          title="Continue"
-          onPress={this.handleSubmit}
-        />
-        <Button
-          buttonStyle={styles.button}
-          textStyle={styles.buttonText}
-          title="No account? Sign up!"
-          onPress={() => {
-            this.props.navigation.navigate('Signup');
-            this.setState({
-              email: '',
-              password: '',
-              error: ''
-            });
-          }}
-        />
+        <View style={styles.buttonContainer}>
+          <Button
+            buttonStyle={styles.button}
+            textStyle={styles.buttonText}
+            title="Continue"
+            onPress={this.handleSubmit}
+          />
+
+          <Button
+            buttonStyle={[styles.button, styles.signupButton]}
+            textStyle={styles.buttonText}
+            title="No account? Sign up!"
+            onPress={() => {
+              this.props.navigation.navigate('Signup');
+              this.setState({
+                email: '',
+                password: '',
+                error: ''
+              });
+            }}
+          />
+
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -102,52 +106,45 @@ export default connect(null, mapDispatchToProps)(Login);
 
 const styles = StyleSheet.create({
   container: {
-    // flexDirection: 'column',
-    // justifyContent: 'center',
+    justifyContent: 'center',
     backgroundColor: 'white',
-    paddingTop: 35,
-    // paddingHorizontal: 25,
     flex: 1
   },
   header: {
     alignSelf: 'center'
   },
-  // icons: {
-  //   alignSelf: 'center',
-  //   backgroundColor: 'red'
-  // },
-  // textLabel: {
-  //   fontSize: 15,
-  //   marginTop: 10,
-  //   padding: 10
-  // },
   textInput: {
     height: 40,
     width: 300,
     margin: 5,
     color: 'black',
     fontSize: 15,
-    // borderWidth: 1,
     borderBottomWidth: 1,
     borderRadius: 5,
     alignSelf: 'center',
   },
+  buttonContainer: {
+    marginTop: 5
+  },
   button: {
-    backgroundColor: 'gray',
+    backgroundColor: '#008242',
     width: '85%',
     height: 45,
     borderRadius: 5,
     alignSelf: 'center',
     margin: 4
+
+  },
+  signupButton: {
+    backgroundColor: '#646360'
   },
   buttonText: {
     fontSize: 15
+  },
+  error: {
+    fontSize: 15,
+    color: 'red',
+    alignSelf: 'center',
+    fontWeight: 'bold'
   }
-  // error: {
-  //   fontSize: 15,
-  //   color: 'blue',
-  //   marginVertical: 0,
-  //   paddingLeft: 10,
-  //   fontWeight: 'bold'
-  // }
 });
