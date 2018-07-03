@@ -142,7 +142,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignSelf: 'center',
     margin: 4
-
   },
   signupButton: {
     backgroundColor: '#646360'

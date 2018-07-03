@@ -13,21 +13,19 @@ class Profile extends React.Component {
 
     return (
       <View >
-        <Card title={user.fullName}>
-          <Button
-            backgroundColor='#03A9F4'
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1}}
-            title='Pending Recommendations'
-            onPress={() => fetchPending(user.id, navigation)}
-          />
+        <Button
+          backgroundColor='#03A9F4'
+          buttonStyle={styles.button}
+          title='Pending Recommendations'
+          onPress={() => fetchPending(user.id, navigation)}
+        />
 
-          <Button
-            backgroundColor='red'
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 1, marginTop: 1}}
-            title='Open Requests'
-            onPress={() => fetchRequests(user.id, navigation)}
-          />
-        </Card>
+        <Button
+          backgroundColor='red'
+          buttonStyle={styles.button}
+          title='Open Requests'
+          onPress={() => fetchRequests(user.id, navigation)}
+        />
       </View>
     )
   }
@@ -50,7 +48,15 @@ export default connect(mapStateToProps, mapDispatchToProps)(Profile)
 
 const styles = StyleSheet.create({
   container: {
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  button: {
+    backgroundColor: '#008242',
+    width: '85%',
+    height: 45,
+    borderRadius: 5,
+    alignSelf: 'center',
+    margin: 4
   },
 });

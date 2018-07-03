@@ -6,6 +6,7 @@ const GET_LIST_BY_CATEGORY = 'GET_LIST_BY_CATEGORY';
 export const getListByCategory = listByCategory => ({type: GET_LIST_BY_CATEGORY, listByCategory})
 
 export const fetchListByCategory = (category, userId, navigation) => dispatch => {
+  category = category.split(' ').join(' ').toLowerCase()
   axios.get(`${IP}/api/recommendations/${category}/users/${userId}`)
   .then(res => res.data)
   .then(listByCategory => {
