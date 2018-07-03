@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text, Icon, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import AddOwnRec from './AddOwnRec';
 
@@ -13,7 +13,7 @@ class ListByCategory extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text>{category}</Text>
+        <Text h4>{category}</Text>
         <AddOwnRec category={category} />
         <List>
           {
@@ -45,9 +45,7 @@ export default connect(mapStateToProps, null)(ListByCategory)
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    flex: 1,
+    backgroundColor: 'white'
   },
 });

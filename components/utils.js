@@ -5,3 +5,20 @@ export const getRecommendedAtDate = createdAt => {
   const recommendedAt = `${months[dateSplit[1]]} ${dateSplit[2]}, ${dateSplit[0]}`;
   return recommendedAt
 }
+
+export const icons = {
+  books: {
+    name: 'book',
+    type: 'font-awesome'
+  },
+  movies: {
+    name: 'movie'
+  },
+  tvshows: {
+    name: 'tv'
+  },
+  podcasts: {
+    name: 'podcast',
+    type: 'font-awesome'
+  }
+}

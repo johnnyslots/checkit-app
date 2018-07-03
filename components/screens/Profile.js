@@ -16,13 +16,14 @@ class Profile extends React.Component {
         <Button
           backgroundColor='#03A9F4'
           buttonStyle={styles.button}
+          textStyle={styles.buttonText}
           title='Pending Recommendations'
           onPress={() => fetchPending(user.id, navigation)}
         />
-
         <Button
           backgroundColor='red'
           buttonStyle={styles.button}
+          textStyle={styles.buttonText}
           title='Open Requests'
           onPress={() => fetchRequests(user.id, navigation)}
         />
@@ -59,4 +60,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 4
   },
+  buttonText: {
+    fontFamily: 'Palatino'
+  }
 });

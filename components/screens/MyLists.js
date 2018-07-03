@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Text, Icon, ListItem } from 'react-native-elements';
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import { logout } from '../redux/auth';
 import { fetchListByCategory } from '../redux/listByCategory';
 import Profile from './Profile';
+import { icons } from '../utils';
 
 class MyLists extends React.Component {
   render() {
@@ -13,27 +13,11 @@ class MyLists extends React.Component {
     const { user } = this.props;
     const navigation = this.props.navigation;
     const categories = ['Books', 'Movies', 'Podcasts', 'TV Shows'];
-    const icons = {
-      books: {
-        name: 'book',
-        type: 'font-awesome'
-      },
-      movies: {
-        name: 'movie'
-      },
-      tvshows: {
-        name: 'tv'
-      },
-      podcasts: {
-        name: 'podcast',
-        type: 'font-awesome'
-      }
-    }
 
     return (
       <View style={styles.container}>
         <View style={styles.userNameContainer}>
-          <Text h3 style={styles.userName}>{user.fullName}</Text>
+          <Text h3 style={[styles.userName, styles.textFont]}>{user.fullName}</Text>
         </View>
         <View style={styles.yourListsContainer}>
           {
@@ -43,10 +27,11 @@ class MyLists extends React.Component {
               return (
                   <ListItem
                     key={i}
-                    titleStyle={styles.listItemTitle}
+                    titleStyle={[styles.listItemTitle, styles.textFont]}
                     containerStyle={styles.listItemContainer}
                     onPress={() => this.props.fetchList(category, user.id, navigation)}
                     title={category}
+                    chevronColor='#646360'
                     leftIcon={{
                       name: icons[iconCategory].name,
                       type: type
@@ -60,6 +45,7 @@ class MyLists extends React.Component {
         <Profile navigation={navigation}/>
           <Button
             buttonStyle={[styles.button, styles.logoutButton]}
+            textStyle={styles.textFont}
             title="Logout"
             onPress={() => this.props.logout(navigation)}
           />
@@ -83,7 +69,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyLists);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   userNameContainer: {
     borderBottomWidth: .2,
@@ -98,7 +84,7 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   yourListsContainer: {
-    marginBottom: 20
+    marginTop: 20
   },
   button: {
     backgroundColor: '#008242',
@@ -109,7 +95,6 @@ const styles = StyleSheet.create({
     margin: 4
   },
   listItemTitle: {
-
     marginLeft: 10
   },
   listItemContainer: {
@@ -123,5 +108,8 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     backgroundColor: '#646360',
+  },
+  textFont: {
+    fontFamily: 'Palatino'
   }
 });
