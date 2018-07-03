@@ -123,8 +123,8 @@ export const SignedIn = TabNavigator(
   {
     tabBarOptions: {
       showLabel: false,
-      activeTintColor: 'red',
-      inactiveTintColor: 'gray',
+      activeTintColor: '#008242',
+      inactiveTintColor: '#646360',
       labelStyle: {
         fontSize: 12
       }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Button, Text, Icon, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import AddOwnRec from './AddOwnRec';
@@ -13,22 +13,27 @@ class ListByCategory extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text h4>{category}</Text>
         <AddOwnRec category={category} />
-        <List>
+        <ScrollView style={styles.listContainer}>
           {
             recs.map(rec => {
               return (
-                <View key={rec.id}>
-                  <ListItem
-                    title={rec.item.title}
-                    onPress={() => this.props.navigation.navigate('RecDetails', {rec})}
-                  />
-                </View>
+                <ListItem
+                  key={rec.id}
+                  titleStyle={[styles.listItemTitle, styles.textFont]}
+                  containerStyle={styles.listItemContainer}
+                  title={rec.item.title}
+                  onPress={() => this.props.navigation.navigate('RecDetails', {rec})}
+                  leftIcon={{
+                    name: 'bookmark',
+                    type: 'font-awesome',
+                    color: '#E8631C'
+                  }}
+                />
               )
             })
           }
-        </List>
+        </ScrollView>
       </View>
     )
   }
@@ -48,4 +53,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white'
   },
+  categoryTitleContainer: {
+    borderBottomWidth: .2,
+    borderBottomColor: '#646360'
+  },
+  categoryTitle: {
+    alignSelf: 'center',
+    marginTop: 50,
+    marginBottom: 10,
+    color: 'black'
+  },
+  listContainer: {
+    marginTop: 20
+  },
+  listItemTitle: {
+    marginLeft: 10
+  },
+  listItemContainer: {
+    paddingLeft: 10
+  },
+  textFont: {
+    fontFamily: 'Palatino'
+  }
 });
