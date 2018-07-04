@@ -62,7 +62,10 @@ const Lists = StackNavigator({
     })
   },
   RecDetails: {
-    screen: RecDetails
+    screen: RecDetails,
+    navigationOptions: {
+      title: 'More Details'
+    }
   }
 })
 

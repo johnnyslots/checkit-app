@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage, Button, Text } from 'react-native-elements';
+import { FormLabel, FormInput, FormValidationMessage, Button, Text, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import IP from '../../secrets';
 import axios from 'axios';
@@ -12,7 +12,8 @@ class AddOwnRec extends React.Component {
     super(props);
     this.state = {
       title: '',
-      notes: ''
+      notes: '',
+      displayError: false
     };
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleNotesChange = this.handleNotesChange.bind(this);
@@ -20,6 +21,9 @@ class AddOwnRec extends React.Component {
   }
 
   handleTitleChange(title) {
+    if(this.state.displayError) {
+      this.setState({displayError: false})
+    }
     this.setState({title});
   }
 
@@ -36,7 +40,10 @@ class AddOwnRec extends React.Component {
       this.props.fetchList(category, userId);
       this.setState({title: '', notes: ''});
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      this.setState({displayError: true})
+    })
   }
 
   render() {
@@ -45,15 +52,21 @@ class AddOwnRec extends React.Component {
 
     return(
       <View>
-        <Text h5 style={styles.formTitle}>Add {category}</Text>
+        <Text h5 style={[styles.formTitle, styles.textFont]}>Add {category}</Text>
         <TextInput
-          style={styles.textInput}
+          style={[styles.textInput, styles.textFont]}
           onChangeText={this.handleTitleChange}
           value={this.state.title}
           placeholder="Title"
         />
+        {
+          this.state.displayError ?
+          <Text h6 style={[styles.error, styles.textFont]}>Please enter the {category.toLowerCase().slice(0,-1)} title</Text>
+          : null
+        }
         <View style={styles.textAreaContainer}>
           <TextInput
+            style={styles.textFont}
             multiline={true}
             numberOfLines={4}
             onChangeText={this.handleNotesChange}
@@ -63,8 +76,10 @@ class AddOwnRec extends React.Component {
         </View>
         <Button
           buttonStyle={styles.button}
+          textStyle={styles.textFont}
           onPress={this.handleSubmit}
           title="Add to list"
+          rightIcon={{name: 'add-to-list', type: 'entypo'}}
         />
       </View>
     )
@@ -126,4 +141,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 5
   },
+  textFont: {
+    fontFamily: 'Palatino'
+  },
+  error: {
+    fontSize: 15,
+    color: 'red',
+    marginLeft: '10%'
+  }
 })

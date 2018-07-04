@@ -48,6 +48,7 @@ class MyLists extends React.Component {
             textStyle={styles.textFont}
             title="Logout"
             onPress={() => this.props.logout(navigation)}
+            rightIcon={{name: 'log-out', type: 'feather'}}
           />
         </View>
       </View>
