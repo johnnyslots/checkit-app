@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Button, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import TimeAgo from 'react-native-timeago';
@@ -20,8 +21,7 @@ class PendingRecs extends React.Component {
     acceptRec(recId, pendingRecs)
     .then(() => {
       this.setState({displayNotification: true})
-      // setTimeout(() => {this.setState({displayNotification: false})}, 1500)
-      this.setState({test: false})
+      setTimeout(() => {this.setState({displayNotification: false})}, 1500)
     })
     .catch(err => console.log(err))
   }
@@ -31,32 +31,41 @@ class PendingRecs extends React.Component {
     const checkmark = '\u2714'
 
     return (
-      <View>
+      <View style={styles.container}>
         <ScrollView>
           {
             pendingRecs.length ?
             pendingRecs.map(rec => {
               return (
-                <View key={rec.id}>
-                  <Text>{rec.item.title}</Text>
+                <Card key={rec.id} title={rec.item.title} style={styles.cardContainer}>
                   <Text>Recommended by {rec.from.fullName}</Text>
                   <TimeAgo time={rec.createdAt} />
-
                   {
                     rec.notes
                     ? <Text>Notes: {rec.notes}</Text>
                     : null
                   }
-
-                  <Button
-                    title={`Add to ${rec.item.category} list`}
-                    onPress={() => this.handleAddRecPress(rec.id, pendingRecs)}
-                  />
-                  <Button
-                    title="Dismiss this recommendation"
-                    onPress={() => deleteRec(rec.id, pendingRecs)}
-                  />
-                </View>
+                  <View style={styles.iconContainer}>
+                    <Icon
+                      raised
+                      reverse
+                      iconStyle={styles.icon}
+                      color='#008242'
+                      name='plus'
+                      type='font-awesome'
+                      onPress={() => this.handleAddRecPress(rec.id, pendingRecs)}
+                    />
+                    <Icon
+                      raised
+                      reverse
+                      iconStyle={styles.icon}
+                      color='red'
+                      name='remove'
+                      type='font-awesome'
+                      onPress={() => deleteRec(rec.id, pendingRecs)}
+                    />
+                  </View>
+                </Card>
               )
             })
             :
@@ -88,3 +97,31 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PendingRecs)
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  cardContainer: {
+    flex: 1
+  },
+  iconContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: 5,
+    marginBottom: 5,
+  },
+  icon: {
+    // backgroundColor: '#008242',
+    // width: 90,
+    // height: 45,
+    // borderRadius: 5,
+    // alignSelf: 'center',
+    // margin: 15
+  },
+  // buttonText: {
+  //   fontFamily: 'Palatino'
+  // }
+});
