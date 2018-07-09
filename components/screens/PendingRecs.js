@@ -37,12 +37,12 @@ class PendingRecs extends React.Component {
             pendingRecs.length ?
             pendingRecs.map(rec => {
               return (
-                <Card key={rec.id} title={rec.item.title} style={styles.cardContainer}>
-                  <Text>Recommended by {rec.from.fullName}</Text>
-                  <TimeAgo time={rec.createdAt} />
+                <Card key={rec.id} title={rec.item.title} style={styles.cardContainer} titleStyle={styles.textFont}>
+                  <Text style={styles.textFont}>Recommended by {rec.from.fullName}</Text>
+                  <TimeAgo style={styles.textFont} time={rec.createdAt} />
                   {
                     rec.notes
-                    ? <Text>Notes: {rec.notes}</Text>
+                    ? <Text style={styles.textFont}>Notes: {rec.notes}</Text>
                     : null
                   }
                   <View style={styles.iconContainer}>
@@ -70,7 +70,7 @@ class PendingRecs extends React.Component {
             })
             :
             <View>
-              <Text>You have no pending recommendations!</Text>
+              <Text style={[styles.textFont, styles.noPending]}>You have no pending recommendations!</Text>
             </View>
           }
         </ScrollView>
@@ -110,18 +110,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginTop: 5,
+    marginTop: 10,
     marginBottom: 5,
   },
-  icon: {
-    // backgroundColor: '#008242',
-    // width: 90,
-    // height: 45,
-    // borderRadius: 5,
-    // alignSelf: 'center',
-    // margin: 15
+  noPending: {
+    alignSelf: 'center',
+    fontSize: 16,
+    marginTop: '10%'
   },
-  // buttonText: {
-  //   fontFamily: 'Palatino'
-  // }
+  textFont: {
+    fontFamily: 'Palatino',
+    margin: 1
+  }
 });
