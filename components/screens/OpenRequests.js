@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 import TimeAgo from 'react-native-timeago';
 import { connect } from 'react-redux';
 
@@ -10,24 +10,27 @@ class OpenRequests extends React.Component {
     const { openRequests, navigation } = this.props
 
     return (
-      <ScrollView>
-        <Text>OPEN REQUESTS</Text>
+      <ScrollView style={styles.container}>
         {
           openRequests.length ?
           openRequests.map(request => {
             return (
-              <View key={request.id}>
-                <TimeAgo time={request.createdAt} />
-                <Text>From: {request.from.fullName}</Text>
+              <Card key={request.id}>
+                <View style={styles.cardHeaderContainer}>
+                  <Text style={styles.cardHeader}>{request.from.fullName}</Text>
+                  <TimeAgo time={request.createdAt} style={styles.cardHeader} />
+                </View>
                 <Text>Category: {request.category}</Text>
-                <Text>{request.message}</Text>
+                <Text style={styles.cardMessage}>Message: {request.message}</Text>
                 <Button
                 title='Send Recommendation'
                 backgroundColor='#03A9D1'
-                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                buttonStyle={styles.button}
+                textStyle={styles.textFont}
                 onPress={() => navigation.navigate('FulfillRequest', {request})}
+                rightIcon={{name: 'send', type: 'material-icon'}}
                 />
-              </View>
+              </Card>
             )
           })
           :
@@ -45,3 +48,34 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(OpenRequests)
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  cardHeaderContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  cardHeader: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  cardMessage: {
+    marginTop: 12,
+    marginBottom: 12
+  },
+  button: {
+    backgroundColor: '#008242',
+    width: '110%',
+    height: 45,
+    borderRadius: 5,
+    alignSelf: 'center',
+    // margin: 4
+  },
+  textFont: {
+    fontFamily: 'Palatino'
+  }
+})

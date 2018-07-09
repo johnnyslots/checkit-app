@@ -37,7 +37,7 @@ class PendingRecs extends React.Component {
             pendingRecs.length ?
             pendingRecs.map(rec => {
               return (
-                <Card key={rec.id} title={rec.item.title} style={styles.cardContainer} titleStyle={styles.textFont}>
+                <Card key={rec.id} title={rec.item.title} titleStyle={styles.textFont}>
                   <Text style={styles.textFont}>Recommended by {rec.from.fullName}</Text>
                   <TimeAgo style={styles.textFont} time={rec.createdAt} />
                   {
@@ -102,9 +102,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white'
-  },
-  cardContainer: {
-    flex: 1
   },
   iconContainer: {
     flex: 1,

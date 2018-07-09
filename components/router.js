@@ -15,17 +15,21 @@ import FulfillRequest from './screens/FulfillRequest';
 import PendingFriends from './screens/PendingFriends';
 import SearchAcceptedFriends from './screens/SearchAcceptedFriends';
 
+const headerTitleStyle = {fontFamily: 'Palatino'}
+
 export const SignedOut = StackNavigator({
   Login: {
     screen: Login,
     navigationOptions: {
-      title: 'Login'
+      title: 'Login',
+      headerTitleStyle
     }
   },
   Signup: {
     screen: Signup,
     navigationOptions: {
-      title: 'Sign Up'
+      title: 'Sign Up',
+      headerTitleStyle
     }
   }
 });
@@ -34,37 +38,43 @@ const Lists = StackNavigator({
   MyLists: {
     screen: MyLists,
     navigationOptions: {
-      title: 'Home'
+      title: 'Home',
+      headerTitleStyle
     }
   },
   PendingRecs: {
     screen: PendingRecs,
     navigationOptions: {
-      title: 'Pending'
+      title: 'Pending',
+      headerTitleStyle
     }
   },
   OpenRequests: {
     screen: OpenRequests,
     navigationOptions: {
-      title: 'Open Requests'
+      title: 'Open Requests',
+      headerTitleStyle
     }
   },
   FulfillRequest: {
     screen: FulfillRequest,
     navigationOptions: {
-      title: 'Send Recommendation'
+      title: 'Send Recommendation',
+      headerTitleStyle
     }
   },
   ListByCategory: {
     screen: ListByCategory,
     navigationOptions: ({navigation}) => ({
-      title: `${navigation.state.params.category}`
+      title: `${navigation.state.params.category}`,
+      headerTitleStyle
     })
   },
   RecDetails: {
     screen: RecDetails,
     navigationOptions: {
-      title: 'More Details'
+      title: 'More Details',
+      headerTitleStyle
     }
   }
 })
@@ -73,13 +83,15 @@ const NewRecStack = StackNavigator({
   SearchAcceptedFriends: {
     screen: SearchAcceptedFriends,
     navigationOptions: {
-      title: 'New Recommendation'
+      title: 'New Recommendation',
+      headerTitleStyle
     }
   },
   NewRec: {
     screen: NewRec,
     navigationOptions: {
-      title: 'New Recommendation'
+      title: 'New Recommendation',
+      headerTitleStyle
     }
   }
 })
@@ -88,13 +100,15 @@ const FindFriendsStack = StackNavigator({
   FindFriends: {
     screen: FindFriends,
     navigationOptions: {
-      title: 'Find Friends'
+      title: 'Find Friends',
+      headerTitleStyle
     }
   },
   PendingFriends: {
     screen: PendingFriends,
     navigationOptions: {
-      title: 'Friend Requests'
+      title: 'Friend Requests',
+      headerTitleStyle
     }
   }
 })
