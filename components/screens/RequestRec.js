@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
-import { TextField } from 'react-native-material-textfield';
+// import { TextField } from 'react-native-material-textfield';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -87,26 +87,33 @@ class RequestRec extends React.Component {
     const checkmark = '\u2714'
 
     return (
-      <View>
-        <Text>REQUEST A RECOMMENDATION FROM {friend.fullName}</Text>
+      <KeyboardAvoidingView behavior="position" style={styles.container}>
+        <Text style={[styles.textFont, styles.header]}>{friend.fullName}</Text>
         <Dropdown
-          label='Category'
+          placeholder='Category'
           data={categories}
-          // containerStyle={sendRecStyles.input}
           onChangeText={this.handleCategoryChange}
+          itemTextStyle={styles.textFont}
+          style={styles.textFont}
         />
         {
-          emptyCategory ? <Text>Category can't be empty</Text> : null
+          emptyCategory ? <Text style={[styles.error, styles.textFont]}>Category can't be empty</Text> : null
         }
-        <TextField
-          // containerStyle={sendRecStyles.input}
-          onChangeText={this.handleMessageChange}
-          value={this.state.message}
-          label="Message"
-        />
+        <View style={styles.textAreaContainer}>
+          <TextInput
+            onChangeText={this.handleMessageChange}
+            value={this.state.message}
+            placeholder="Message"
+            multiline={true}
+            numberOfLines={6}
+          />
+        </View>
         <Button
           title="Send"
           onPress={this.handleSubmit}
+          buttonStyle={styles.button}
+          textStyle={styles.textFont}
+          rightIcon={{name: 'send', type: 'material-icon'}}
         />
         <AwesomeAlert
           show={this.state.displayNotification}
@@ -116,7 +123,7 @@ class RequestRec extends React.Component {
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
         />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -126,3 +133,40 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, null)(RequestRec)
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 15
+  },
+  header: {
+    alignSelf: 'center',
+    fontSize: 22,
+    color: '#646360',
+    marginTop: 15
+  },
+  button: {
+    backgroundColor: '#008242',
+    width: '95%',
+    height: 45,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 15
+  },
+  textAreaContainer: {
+    borderColor: 'gray',
+    width: '100%',
+    borderWidth: .2,
+    padding: 5,
+    marginTop: 10,
+    marginBottom: 10,
+    height: 120,
+    alignSelf: 'center',
+  },
+  textFont: {
+    fontFamily: 'Palatino'
+  },
+  error: {
+    fontSize: 15,
+    color: 'red'
+  }
+});

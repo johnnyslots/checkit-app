@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
-import { TextField } from 'react-native-material-textfield';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -102,35 +101,43 @@ class SendRec extends React.Component {
     const checkmark = '\u2714'
 
     return (
-      <View>
-        <Text>SEND RECOMMENDATION TO {friend.fullName}</Text>
+      <KeyboardAvoidingView behavior="position" style={styles.container}>
+        <Text style={[styles.textFont, styles.header]}>{friend.fullName}</Text>
         <Dropdown
-          label='Category'
+          placeholder='Category'
           data={categories}
-          // containerStyle={sendRecStyles.input}
           onChangeText={this.handleCategoryChange}
+          itemTextStyle={styles.textFont}
+          style={styles.textFont}
+
         />
         {
-          emptyCategory ? <Text>Category can't be empty</Text> : null
+          emptyCategory ? <Text style={[styles.error, styles.textFont]}>Category can't be empty</Text> : null
         }
-        <TextField
-          // containerStyle={sendRecStyles.input}
+        <TextInput
+          style={[styles.textInput, styles.textFont]}
           onChangeText={this.handleTitleChange}
           value={this.state.title}
-          label="Title"
+          placeholder="Title"
         />
         {
-          emptyTitle ? <Text>Title can't be empty</Text> : null
+          emptyTitle ? <Text style={[styles.error, styles.textFont]}>Title can't be empty</Text> : null
         }
-        <TextField
-          // containerStyle={sendRecStyles.input}
-          onChangeText={this.handleNotesChange}
-          value={this.state.notes}
-          label="Notes"
-        />
+        <View style={styles.textAreaContainer}>
+          <TextInput
+            onChangeText={this.handleNotesChange}
+            value={this.state.notes}
+            placeholder="Notes"
+            multiline={true}
+            numberOfLines={6}
+          />
+        </View>
         <Button
           title="Send"
           onPress={this.handleSubmit}
+          buttonStyle={styles.button}
+          textStyle={styles.textFont}
+          rightIcon={{name: 'send', type: 'material-icon'}}
         />
         <AwesomeAlert
           show={this.state.displayNotification}
@@ -140,7 +147,7 @@ class SendRec extends React.Component {
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
         />
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -150,3 +157,51 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, null)(SendRec)
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 15
+  },
+  header: {
+    alignSelf: 'center',
+    fontSize: 22,
+    color: '#646360',
+    marginTop: 15
+  },
+  button: {
+    backgroundColor: '#008242',
+    width: '95%',
+    height: 45,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 15
+  },
+  textInput: {
+    height: 40,
+    width: '100%',
+    margin: 5,
+    marginBottom: 15,
+    color: 'black',
+    fontSize: 15,
+    borderBottomWidth: .2,
+    borderRadius: 5,
+    alignSelf: 'center',
+  },
+  textAreaContainer: {
+    borderColor: 'gray',
+    width: '98%',
+    borderWidth: .2,
+    padding: 5,
+    marginTop: 10,
+    marginBottom: 10,
+    height: 120,
+    alignSelf: 'center',
+  },
+  textFont: {
+    fontFamily: 'Palatino'
+  },
+  error: {
+    fontSize: 15,
+    color: 'red'
+  }
+});

@@ -16,6 +16,7 @@ class ListByCategory extends React.Component {
         <AddOwnRec category={category} />
         <ScrollView style={styles.listContainer}>
           {
+            recs.length ?
             recs.map(rec => {
               return (
                 <ListItem
@@ -32,6 +33,10 @@ class ListByCategory extends React.Component {
                 />
               )
             })
+            :
+            <View style={styles.emptyListContainer}>
+              <Text style={[styles.textFont, styles.emptyListText]}>Your list is currently empty</Text>
+          </View>
           }
         </ScrollView>
       </View>
@@ -71,6 +76,16 @@ const styles = StyleSheet.create({
   },
   listItemContainer: {
     paddingLeft: 10
+  },
+  emptyListContainer: {
+    borderTopWidth: .2,
+    borderBottomColor: '#646360',
+    margin: 10
+  },
+  emptyListText: {
+    alignSelf: 'center',
+    marginTop: 15,
+    fontSize: 16
   },
   textFont: {
     fontFamily: 'Palatino'

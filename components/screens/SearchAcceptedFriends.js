@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { SearchBar, Icon, List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchFilteredFriends, fetchAllFriends } from '../redux/acceptedFriends';
@@ -46,7 +46,7 @@ class SearchAcceptedFriends extends React.Component {
     const { searchValue } = this.state
 
     return (
-      <View>
+      <ScrollView style={styles.container}>
         <SearchBar
           onChangeText={(input) => this.setSearchValue(input)}
           onClearText={() => this.clearSearchValue()}
@@ -62,11 +62,18 @@ class SearchAcceptedFriends extends React.Component {
               <View key={friend.id}>
                 <ListItem
                   title={friend.fullName}
+                  titleStyle={[styles.listItemTitle, styles.textFont]}
+                  containerStyle={styles.listItemContainer}
+                  leftIcon={{
+                    name: 'user',
+                    type: 'font-awesome'
+                  }}
                   rightIcon={
                     <Icon
                       name='send'
                       size={20}
                       onPress={() => this.handleFriendSelection(friend)}
+                      color='#008242'
                     />
                   }
                 />
@@ -75,7 +82,7 @@ class SearchAcceptedFriends extends React.Component {
           })
         }
         </List>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -91,3 +98,19 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchAcceptedFriends)
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  // listItemTitle: {
+  //   marginLeft: 10
+  // },
+  // listItemContainer: {
+  //   paddingLeft: 10
+  // },
+  textFont: {
+    fontFamily: 'Palatino'
+  }
+})

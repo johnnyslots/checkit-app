@@ -39,7 +39,7 @@ const Lists = StackNavigator({
     screen: MyLists,
     navigationOptions: {
       title: 'Home',
-      headerTitleStyle
+      headerTitleStyle,
     }
   },
   PendingRecs: {

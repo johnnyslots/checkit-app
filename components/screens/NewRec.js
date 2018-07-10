@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import SendRec from './SendRec';
 import RequestRec from './RequestRec';
@@ -25,17 +25,21 @@ export default class NewRec extends React.Component {
     const { friend } = this.props.navigation.state.params
 
     return (
-      <View style={styles.container}>
-        <ButtonGroup
-          onPress={() =>  this.updateIndex()}
-          buttons={buttons}
-          selectedIndex={selectedIndex}
-          containerStyle={{backgroundColor: 'green'}}
-        />
+      <KeyboardAvoidingView style={styles.container}>
+        <View style={styles.buttonsContainer}>
+          <ButtonGroup
+            onPress={() =>  this.updateIndex()}
+            buttons={buttons}
+            selectedIndex={selectedIndex}
+            containerStyle={styles.buttonGroupContainer}
+            selectedTextStyle={[styles.selectedText, styles.textFont]}
+            textStyle={[styles.textStyle, styles.textFont]}
+          />
+        </View>
         {
           selectedIndex ? <SendRec friend={friend} /> : <RequestRec friend={friend} />
         }
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -43,8 +47,23 @@ export default class NewRec extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    backgroundColor: 'white'
   },
+  buttonsContainer: {
+    marginTop: '3%'
+  },
+  buttonGroupContainer: {
+    backgroundColor: '#646360',
+    width: '85%',
+    alignSelf: 'center',
+  },
+  selectedText: {
+    color: 'gray'
+  },
+  textStyle: {
+    color: 'white'
+  },
+  textFont: {
+    fontFamily: 'Palatino'
+  }
 });
