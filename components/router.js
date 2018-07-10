@@ -100,7 +100,7 @@ const FindFriendsStack = StackNavigator({
   FindFriends: {
     screen: FindFriends,
     navigationOptions: {
-      title: 'Find Friends',
+      title: 'Find Users',
       headerTitleStyle
     }
   },

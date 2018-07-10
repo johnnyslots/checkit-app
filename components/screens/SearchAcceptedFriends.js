@@ -53,7 +53,7 @@ class SearchAcceptedFriends extends React.Component {
           clearIcon
           icon={{ type: 'font-awesome', name: 'search' }}
           value={searchValue}
-          placeholder='Search'
+          placeholder='Search for friends...'
         />
         <List>
         {

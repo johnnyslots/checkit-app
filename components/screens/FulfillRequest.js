@@ -154,14 +154,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 22,
     color: '#646360',
-    marginTop: 25
   },
   headerFullName: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginTop: 25
   },
   headerSubtitle: {
     fontSize: 16,
-    marginBottom: 15
+    marginBottom: 15,
+    marginTop: 10
   },
   button: {
     backgroundColor: '#008242',

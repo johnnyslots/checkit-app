@@ -17,8 +17,10 @@ class FindFriends extends React.Component {
           backgroundColor='#03A9F4'
           buttonStyle={styles.button}
           textStyle={styles.textFont}
+          rightIcon={{name: 'access-time', type: 'material-icon'}}
           title='Pending Friend Requests'
           onPress={() => fetchPendingFriends(userId, navigation)} />
+
         />
       </View>
     )

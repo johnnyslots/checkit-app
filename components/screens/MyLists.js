@@ -42,7 +42,7 @@ class MyLists extends React.Component {
           }
         </View>
         <View style={styles.logoutContainer}>
-        <Profile navigation={navigation}/>
+          <Profile navigation={navigation}/>
           <Button
             buttonStyle={[styles.button, styles.logoutButton]}
             textStyle={styles.textFont}

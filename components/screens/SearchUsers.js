@@ -58,7 +58,7 @@ class SearchUsers extends React.Component {
           clearIcon
           icon={{ type: 'font-awesome', name: 'search' }}
           value={searchValue}
-          placeholder='Search for friends...'
+          placeholder='Search for users...'
         />
         {
           users.length ?

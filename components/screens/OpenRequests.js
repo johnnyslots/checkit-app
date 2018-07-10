@@ -35,7 +35,7 @@ class OpenRequests extends React.Component {
           })
           :
           <View>
-            <Text>You have no open requests!</Text>
+            <Text style={[styles.textFont, styles.noPending]}>You have no open requests!</Text>
           </View>
         }
       </ScrollView>
@@ -73,7 +73,11 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 5,
     alignSelf: 'center',
-    // margin: 4
+  },
+  noPending: {
+    alignSelf: 'center',
+    fontSize: 16,
+    marginTop: '10%'
   },
   textFont: {
     fontFamily: 'Palatino'
