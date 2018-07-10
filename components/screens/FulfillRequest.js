@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { Button } from 'react-native-elements';
-import { TextField } from 'react-native-material-textfield';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -18,6 +17,7 @@ class FulfillRequest extends React.Component {
       title: '',
       notes: '',
       email: '',
+      fullName: '',
       toId: null,
       sender: {},
       displayNotification: false,
@@ -35,13 +35,14 @@ class FulfillRequest extends React.Component {
       requestId: request.id,
       category: request.category,
       email: request.from.email,
+      fullName: request.from.fullName,
       toId: request.from.id,
       sender: this.props.sender
     })
   }
 
   handleTitleChange(title) {
-    if(this.state.title) {
+    if(this.state.emptyTitle) {
       this.setState({emptyTitle: false})
     }
     this.setState({title});
@@ -93,32 +94,37 @@ class FulfillRequest extends React.Component {
 
   render() {
 
-    const { email, category, emptyTitle } = this.state
+    const { fullName, category, emptyTitle } = this.state
     const checkmark = '\u2714'
 
     return (
-      <View>
-        <Text>FULFILL REQUEST</Text>
-        <Text>To: {email}</Text>
-        <Text>Category: {category}</Text>
-        <TextField
-          // containerStyle={sendRecStyles.input}
-          onChangeText={this.handleTitleChange}
-          value={this.state.title}
-          label="Title"
-        />
+      <View style={styles.container}>
+        <Text style={[styles.textFont, styles.header, styles.headerFullName]}>{fullName}</Text>
+        <Text style={[styles.textFont, styles.header, styles.headerSubtitle]}>Category: {category}</Text>
+          <TextInput
+            style={[styles.textInput, styles.textFont]}
+            onChangeText={this.handleTitleChange}
+            value={this.state.title}
+            placeholder="Title"
+          />
         {
-          emptyTitle ? <Text>Title can't be empty</Text> : null
+          emptyTitle ? <Text style={[styles.error, styles.textFont]}>Title can't be empty</Text> : null
         }
-        <TextField
-          // containerStyle={sendRecStyles.input}
-          onChangeText={this.handleNotesChange}
-          value={this.state.notes}
-          label="Notes"
-        />
+        <View style={styles.textAreaContainer}>
+          <TextInput
+            onChangeText={this.handleNotesChange}
+            value={this.state.notes}
+            placeholder="Notes"
+            multiline={true}
+            numberOfLines={6}
+          />
+        </View>
         <Button
           title="Send"
           onPress={this.handleSubmit}
+          buttonStyle={styles.button}
+          textStyle={styles.textFont}
+          rightIcon={{name: 'send', type: 'material-icon'}}
         />
         <AwesomeAlert
           show={this.state.displayNotification}
@@ -138,3 +144,59 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, null)(FulfillRequest)
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  header: {
+    alignSelf: 'center',
+    fontSize: 22,
+    color: '#646360',
+    marginTop: 25
+  },
+  headerFullName: {
+    fontWeight: 'bold'
+  },
+  headerSubtitle: {
+    fontSize: 16,
+    marginBottom: 15
+  },
+  button: {
+    backgroundColor: '#008242',
+    width: '95%',
+    height: 45,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 15
+  },
+  textInput: {
+    height: 40,
+    width: '92%',
+    margin: 5,
+    color: 'black',
+    fontSize: 15,
+    borderBottomWidth: .2,
+    borderRadius: 5,
+    alignSelf: 'center',
+  },
+  textAreaContainer: {
+    borderColor: 'gray',
+    borderWidth: .2,
+    padding: 5,
+    marginLeft: '5%',
+    marginRight: '5%',
+    marginTop: 20,
+    marginBottom: 10,
+    height: 180,
+  },
+  textFont: {
+    fontFamily: 'Palatino'
+  },
+  error: {
+    fontSize: 15,
+    color: 'red',
+    marginLeft: '5%'
+  }
+});

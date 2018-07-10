@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { SearchBar, List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../redux/searchUsers';
@@ -51,7 +51,7 @@ class SearchUsers extends React.Component {
     const { pendingOrRejected, accepted, searchValue } = this.state
 
     return (
-      <View>
+      <ScrollView style={styles.container}>
         <SearchBar
           onChangeText={(input) => this.setSearchValue(input)}
           onClearText={() => this.clearSearchValue()}
@@ -83,11 +83,17 @@ class SearchUsers extends React.Component {
                   <View key={user.id}>
                     <ListItem
                       title={user.fullName}
+                      titleStyle={styles.textFont}
+                      leftIcon={{
+                        name: 'user',
+                        type: 'font-awesome'
+                      }}
                       rightIcon={
                         <Icon
                           name={iconName}
                           size={20}
                           onPress={() => onPressFunc(user.id)}
+                          color='#008242'
                         />
                       }
                     />
@@ -98,7 +104,7 @@ class SearchUsers extends React.Component {
           </List>
           : null
         }
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -113,3 +119,13 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchUsers)
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  textFont: {
+    fontFamily: 'Palatino'
+  }
+})

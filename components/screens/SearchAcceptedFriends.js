@@ -62,8 +62,7 @@ class SearchAcceptedFriends extends React.Component {
               <View key={friend.id}>
                 <ListItem
                   title={friend.fullName}
-                  titleStyle={[styles.listItemTitle, styles.textFont]}
-                  containerStyle={styles.listItemContainer}
+                  titleStyle={styles.textFont}
                   leftIcon={{
                     name: 'user',
                     type: 'font-awesome'
@@ -104,12 +103,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  // listItemTitle: {
-  //   marginLeft: 10
-  // },
-  // listItemContainer: {
-  //   paddingLeft: 10
-  // },
   textFont: {
     fontFamily: 'Palatino'
   }
