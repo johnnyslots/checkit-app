@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
-// import { TextField } from 'react-native-material-textfield';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { connect } from 'react-redux';
 import axios from 'axios';

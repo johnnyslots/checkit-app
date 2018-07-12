@@ -1,5 +1,7 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "sdkVersion": "27.0.0",
+    "name": "checkit-app",
+    "icon": "http://www.socialfocusbycg.com/wp-content/uploads/2017/01/300x300-checkmark.png"
   }
 }
