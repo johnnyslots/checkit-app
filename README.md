@@ -2,4 +2,4 @@ CheckIt is a mobile app that allows you to send and receive recommendations for 
 
 For server code, see https://github.com/johnnyslots/checkit-server
 
-![]('./assets/checkit-home.png')
+![]('assets/checkit-home.png')
