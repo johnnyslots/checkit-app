@@ -2,4 +2,6 @@ CheckIt is a mobile app that allows you to send and receive recommendations for 
 
 For server code, see https://github.com/johnnyslots/checkit-server
 
-![Login](./assets/checkit-login.png =250x)
+![Login](assets/checkit-login.png){:height="36px" width="36px"}
+
+<img src="assets/checkit-login.png" alt="login" width="200px"/>
