@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { createRootNavigator } from './router';
 import { isSignedIn } from './auth';
 import store from './store';
@@ -29,7 +29,6 @@ export default class App extends React.Component {
     if(type === 'newRecRequest') screen = 'OpenRequests'
     else if(type === 'newRec') screen = 'PendingRecs'
     else if(type === 'friendRequest') screen = 'PendingFriends'
-    console.log('type & screen!?!?', type, screen)
     this.navigator && this.navigator.dispatch(
       NavigationActions.navigate({ routeName: screen }))
   }
@@ -49,7 +48,6 @@ export default class App extends React.Component {
             <NewRecAlert nav={this.nav}/>
           </React.Fragment>
         </Provider>
-
     );
   }
 }

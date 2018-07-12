@@ -69,7 +69,6 @@ class NewRecAlert extends React.Component {
 
     if(displayAlert) {
       return (
-        <View style={styles.container}>
           <AwesomeAlert
             show={displayAlert}
             showProgress={false}
@@ -90,7 +89,6 @@ class NewRecAlert extends React.Component {
               this.handleIncomingRecConfirmation();
             }}
           />
-        </View>
       )
     }
     else return null

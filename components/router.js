@@ -163,8 +163,7 @@ export const createRootNavigator = (signedIn = false) => {
         }
       },
       SignedOut: {
-        //changed screen from SignedOut to SignedIn for dev
-        screen: SignedIn,
+        screen: SignedOut,
         navigationOptions: {
           gesturesEnabled: false
         }

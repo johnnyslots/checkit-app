@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   userNameContainer: {
-    borderBottomWidth: .2,
+    borderBottomWidth: .5,
     borderBottomColor: '#646360',
     margin: 15,
     marginTop: 15

@@ -1,7 +1,7 @@
 // React-Native's version of local storage
 import { AsyncStorage } from 'react-native';
 
-export const KEY = 'create-react-native-app-redux-auth-demo-key';
+export const KEY = 'checkit-app';
 
 // Set storage to hold key as TRUE
 export const onSignIn = () => AsyncStorage.setItem(KEY, 'true');

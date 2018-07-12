@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   categoryTitleContainer: {
-    borderBottomWidth: .2,
+    borderBottomWidth: .5,
     borderBottomColor: '#646360'
   },
   categoryTitle: {
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   emptyListContainer: {
-    borderTopWidth: .2,
+    borderTopWidth: .5,
     borderBottomColor: '#646360',
     margin: 10
   },

@@ -1,16 +1,16 @@
 import axios from 'axios';
 import IP from '../../secrets';
 
-const user = {
-"createdAt": "2018-06-28T16:18:53.093Z",
-"email": "cody@email.com",
-"firstName": "Cody",
-"fullName": "Cody Smith",
-"googleId": null,
-"id": 1,
-"lastName": "Smith",
-"updatedAt": "2018-06-28T16:18:53.093Z"
-}
+// const user = {
+// "createdAt": "2018-06-28T16:18:53.093Z",
+// "email": "cody@email.com",
+// "firstName": "Cody",
+// "fullName": "Cody Smith",
+// "googleId": null,
+// "id": 1,
+// "lastName": "Smith",
+// "updatedAt": "2018-06-28T16:18:53.093Z"
+// }
 
 /* -----------------    ACTION TYPES    ------------------ */
 
@@ -34,7 +34,7 @@ export default function reducer (currentUser = {}, action) {
       return {};
 
     default:
-      return user;
+      return currentUser;
   }
 }
 

@@ -138,12 +138,9 @@ const styles = StyleSheet.create({
     margin: 5,
     color: 'black',
     fontSize: 15,
-    borderBottomWidth: 1,
+    borderBottomWidth: .5,
     borderRadius: 5,
     alignSelf: 'center',
-  },
-  buttonContainer: {
-    marginTop: 5
   },
   button: {
     backgroundColor: '#008242',
@@ -151,7 +148,8 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 5,
     alignSelf: 'center',
-    margin: 4
+    margin: 4,
+    marginTop: 15
   },
   buttonText: {
     fontSize: 15

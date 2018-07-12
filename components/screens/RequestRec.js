@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   textAreaContainer: {
     borderColor: 'gray',
     width: '100%',
-    borderWidth: .2,
+    borderWidth: .8,
     padding: 5,
     marginTop: 10,
     marginBottom: 10,
