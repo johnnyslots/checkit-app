@@ -4,7 +4,7 @@ For server code, see https://github.com/johnnyslots/checkit-server
 
 Login / Signup flow:
 
-<img src="assets/checkit-login.png" alt="login" width="250px"/>
+![Alt Text](https://media.giphy.com/media/fH9MaiIBoSydwqFsPH/giphy.gif)
 
 Send recommendations or requests for recommendations to friends:
 
