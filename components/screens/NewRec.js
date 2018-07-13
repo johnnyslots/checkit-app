@@ -20,12 +20,12 @@ export default class NewRec extends React.Component {
 
   render() {
 
-    const buttons = ['Send', 'Request']
+    const buttons = ['Share', 'Request']
     const { selectedIndex } = this.state
     const { friend } = this.props.navigation.state.params
 
     return (
-      <KeyboardAvoidingView style={styles.container}>
+      <KeyboardAvoidingView behavior="position" style={styles.container}>
         <View style={styles.buttonsContainer}>
           <ButtonGroup
             onPress={() =>  this.updateIndex()}

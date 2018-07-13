@@ -109,7 +109,6 @@ class SendRec extends React.Component {
           onChangeText={this.handleCategoryChange}
           itemTextStyle={styles.textFont}
           style={styles.textFont}
-
         />
         {
           emptyCategory ? <Text style={[styles.error, styles.textFont]}>Category can't be empty</Text> : null
@@ -160,7 +159,8 @@ export default connect(mapStateToProps, null)(SendRec)
 
 const styles = StyleSheet.create({
   container: {
-    margin: 15
+    margin: 15,
+    // flex: 1
   },
   header: {
     alignSelf: 'center',

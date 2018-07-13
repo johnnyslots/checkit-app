@@ -61,12 +61,12 @@ class Signup extends React.Component {
    return (
     <KeyboardAvoidingView behavior="position" style={styles.container}>
       <View style={styles.header}>
-        <ElementsText h1>
+        <ElementsText h1 style={styles.textFont}>
           Check
-            <ElementsText h1 style={styles.headerIt}>
+          <ElementsText h1 style={[styles.headerIt, styles.textFont]}>
             It
-            </ElementsText>
           </ElementsText>
+        </ElementsText>
       </View>
       <LoginIcons />
       <ScrollView>
@@ -159,5 +159,8 @@ const styles = StyleSheet.create({
     color: 'red',
     alignSelf: 'center',
     fontWeight: 'bold'
+  },
+  textFont: {
+    fontFamily: 'Palatino'
   }
 });

@@ -2,6 +2,25 @@ CheckIt is a mobile app that allows you to send and receive recommendations for 
 
 For server code, see https://github.com/johnnyslots/checkit-server
 
-<!-- ![Login](assets/checkit-login.png){:height="36px" width="36px"} -->
+Login / Signup flow:
 
 <img src="assets/checkit-login.png" alt="login" width="350px"/>
+
+Send recommendations or requests for recommendations to friends:
+
+![Alt Text](https://media.giphy.com/media/12PHgUILXePGPtpjVd/giphy.gif)
+
+Recive a recommendation from a friend and decide whether to accept it into your list:
+
+Add items to your own list:
+
+
+See your pending recommendations:
+
+See your open requests for recommendations:
+
+Search for CheckIt users to add as friends, and see pending friend requests:
+
+
+
+
